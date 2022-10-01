@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{d420db2a-98c0-4a74-a6e6-d57935602e42}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)dependencies\entt\entt.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Application.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\DebugMacros.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Error.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Scene\Component.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Scene\Scene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Settings.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\Application.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\Scene\Scene.cpp" />
+  </ItemGroup>
+</Project>
