@@ -16,6 +16,12 @@
     <Filter Include="dependencies\glm">
       <UniqueIdentifier>{92882742-4524-4328-b334-1aa28657fc73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="dependencies\KHR">
+      <UniqueIdentifier>{11990734-fe1d-48d1-91fc-ed070842619d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dependencies\glad">
+      <UniqueIdentifier>{5dd50332-215b-40e8-baaf-928d6da55b96}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)dependencies\entt\entt.hpp">
@@ -48,6 +54,21 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)src\FWEngine.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Window.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Camera.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Input.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)dependencies\KHR\khrplatform.h">
+      <Filter>dependencies\KHR</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)dependencies\glad\glad.h">
+      <Filter>dependencies\glad</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)src\Application.cpp">
@@ -58,6 +79,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)src\Scene\Entity.cpp">
       <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\Window.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\Input.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)dependencies\glad\glad.c">
+      <Filter>dependencies\glad</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

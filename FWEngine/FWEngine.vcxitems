@@ -15,19 +15,27 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)dependencies\entt\entt.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)dependencies\glad\glad.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)dependencies\glm\glm.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)dependencies\KHR\khrplatform.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Application.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Camera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\DebugMacros.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Error.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\FWEngine.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Input.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Scene\Component.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Scene\Entity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Scene\Scene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Settings.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)dependencies\glad\glad.c" />
     <ClCompile Include="$(MSBuildThisFileDirectory)src\Application.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\Input.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)src\Scene\Entity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)src\Scene\Scene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\Window.cpp" />
   </ItemGroup>
 </Project>

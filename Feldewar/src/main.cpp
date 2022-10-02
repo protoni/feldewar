@@ -4,6 +4,8 @@
 #include "Error.h"
 #include "Settings.h"
 
+#include "windows.h"
+#include <crtdbg.h>
 #include <iostream>
 
 #define _CRTDBG_MAP_ALLOC //to get more details
@@ -38,17 +40,14 @@ int main(int argc, char** argv)
     // Create application settings
     ENGINE::Settings settings;
     
-    // Create window
+    // Create window and camera
     ENGINE::Error err;
     settings.window.name = "Feldewar";
     settings.window.width = 1600;
     settings.window.height = 800;
-    ///if (!app.CreateWindow(settings.window, err)) {
-    ///    err.Print();
-    ///}
-
-    // Create a scene
-
+    if (!app.Init(settings.window, err)) {
+        err.Print();
+    }
 
     // Load models and textures, build shaders
     settings.data.modelPath = "./Models";
@@ -64,6 +63,8 @@ int main(int argc, char** argv)
     ///    err.Print();
     ///}
 
+    // Create a scene
+
     // Load playable main player entity ( default cube )
     ///FW::Player player = app.LoadPlayer(err);
     ///if (err.IsErr()) {
@@ -71,8 +72,20 @@ int main(int argc, char** argv)
     ///}
 
     while (app.Run()) {
-
+        app.ProcessInput();
     }
+
+    app.Cleanup();
+
+    std::cout << "Exiting.." << std::endl;
+
+    // Re-direct possible memory leaks to sysout
+    _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
+    _CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
+    _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_FILE);
+    _CrtSetReportFile(_CRT_ERROR, _CRTDBG_FILE_STDOUT);
+    _CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE);
+    _CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDOUT);
 
     return 1;
 }
