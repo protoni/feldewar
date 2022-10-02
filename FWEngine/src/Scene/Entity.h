@@ -32,7 +32,7 @@ public:
     template<typename T>
     bool HasComponent()
     {
-        return false;// return m_scene->m_registry.has<T>(m_entityHandle);
+        return m_scene->m_registry.any_of<T>(m_entityHandle);
     }
 
     template<typename T>
