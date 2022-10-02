@@ -13,6 +13,9 @@
     <Filter Include="src\Scene">
       <UniqueIdentifier>{394cc5c3-bb07-4fad-a40b-710433b074ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="dependencies\glm">
+      <UniqueIdentifier>{92882742-4524-4328-b334-1aa28657fc73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)dependencies\entt\entt.hpp">
@@ -36,12 +39,24 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Scene\Component.h">
       <Filter>src\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Scene\Entity.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)dependencies\glm\glm.hpp">
+      <Filter>dependencies\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\FWEngine.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)src\Application.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)src\Scene\Scene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\Scene\Entity.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
   </ItemGroup>

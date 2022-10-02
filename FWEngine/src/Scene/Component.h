@@ -1,10 +1,23 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
-#include <glm/glm.hpp>
+#include <string>
+
+#include <dependencies/glm/glm.hpp>
+
 
 namespace ENGINE
 {
+
+struct TagComponent
+{
+    std::string Tag;
+
+    TagComponent() = default;
+    TagComponent(const TagComponent&) = default;
+    TagComponent(const std::string & tag)
+        : Tag(tag) {}
+};
 
 struct TransformComponent
 {

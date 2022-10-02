@@ -2,7 +2,7 @@
 #define APPLICATION_H
 
 #include "Error.h"
-#include "entt.hpp"
+#include <dependencies/entt/entt.hpp>
 
 
 namespace ENGINE
