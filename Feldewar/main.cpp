@@ -75,7 +75,7 @@ int main(int argc, char** argv)
     entity.AddComponent<PositionComponent>(glm::vec3(0.0f, 0.0f, 0.0f));
 
     entity = scene.CreateEntity("Test2");
-    entity.AddComponent<PositionComponent>(glm::vec3(1.0f, 0.0f, 0.0f));
+    entity.AddComponent<PositionComponent>(glm::vec3(2.0f, 0.0f, 0.0f));
 
     // Load playable main player entity ( default cube )
     ///FW::Player player = app.LoadPlayer(err);

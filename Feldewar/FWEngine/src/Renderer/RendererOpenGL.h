@@ -25,6 +25,7 @@ namespace ENGINE
         // Define an array of generic vertex attribute data
         void SetVertexAttribPointer(
             unsigned int attrNmbr,
+            unsigned int size,
             unsigned int coordSize,
             unsigned int stride
         );
@@ -47,6 +48,9 @@ namespace ENGINE
         // Un bind vertex array
         void UnBindVertexArray();
 
+        // Unbind vertex and element array buffers
+        void UnBindBuffer() const;
+
         // Draw primitive square
         void DrawSquare();
 
@@ -62,6 +66,7 @@ namespace ENGINE
 
         // Primitives
         unsigned int m_squareVAO;
+        unsigned int m_squareEBO;
     };
 
 }

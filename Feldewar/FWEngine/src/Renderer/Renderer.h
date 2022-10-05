@@ -5,6 +5,7 @@
 #include "RendererOpenGL.h"
 #include "Shader.h"
 #include "Settings.h"
+#include "Camera.h"
 
 #include <memory>
 
@@ -21,11 +22,11 @@ class Renderer
 {
 
 public:
-    Renderer();
+    Renderer(std::shared_ptr<Camera>& camera);
     ~Renderer();
 
     // Initialize graphics API
-    const bool Init(const RenderAPI rendererType);
+    const bool Init(WindowSettings& settings);
 
     // Clear screen
     void ClearScreen(glm::vec4 color, int settings) const;
@@ -34,9 +35,27 @@ public:
     void DrawRect(const glm::mat4& transform, const glm::vec3& position);
 
 private:
+    // Activate shader and set projection matrix
+    void activateShader(std::shared_ptr<Shader>& shader);
+
+    // Translate a matrix
+    void applyTranslations(
+        std::shared_ptr<Shader>& shader,
+        const glm::mat4& transform,
+        const glm::vec3& position
+    );
+
+    // Currently used renderer API
     RenderAPI m_rendererType = RenderAPI::Unknown;
 
+    // OpenGL renderer object
     std::unique_ptr<RendererOpenGL> m_rendererOpenGL = nullptr;
+
+    // Camera object
+    std::shared_ptr<Camera> m_camera = nullptr;
+
+    // Window settings object
+    WindowSettings m_windowSettings;
 
     // Shaders
     std::shared_ptr<Shader> m_lightShader = nullptr;

@@ -41,8 +41,8 @@ const bool Application::Init(WindowSettings& settings, Error& error)
     }
 
     // Init renderer
-    m_renderer = std::make_shared<Renderer>();
-    if (!m_renderer->Init(settings.renderAPI)) {
+    m_renderer = std::make_shared<Renderer>(m_camera);
+    if (!m_renderer->Init(settings)) {
         error.Set(ErrorMessage::RendererCreationError);
         return false;
     }

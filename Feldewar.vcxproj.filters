@@ -23,6 +23,9 @@
     <Filter Include="Source Files\dependencies\entt">
       <UniqueIdentifier>{097669fe-15ed-4788-8bec-2df7cf999fbe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\FWEngine\Renderer\Shaders">
+      <UniqueIdentifier>{7b039f95-0910-45eb-b834-1f3f6f6070be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Feldewar\main.cpp">
@@ -51,6 +54,9 @@
     </ClCompile>
     <ClCompile Include="Feldewar\FWEngine\dependencies\glad\glad.c">
       <Filter>Source Files\dependencies\glad</Filter>
+    </ClCompile>
+    <ClCompile Include="Feldewar\FWEngine\src\Renderer\Mesh.cpp">
+      <Filter>Source Files\FWEngine\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -105,5 +111,22 @@
     <ClInclude Include="Feldewar\FWEngine\dependencies\entt\entt.hpp">
       <Filter>Source Files\dependencies\entt</Filter>
     </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\Renderer\Mesh.h">
+      <Filter>Source Files\FWEngine\Renderer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Feldewar\FWEngine\src\Renderer\Shaders\shader.vs">
+      <Filter>Source Files\FWEngine\Renderer\Shaders</Filter>
+    </None>
+    <None Include="Feldewar\FWEngine\src\Renderer\Shaders\lightMeshShader.fs">
+      <Filter>Source Files\FWEngine\Renderer\Shaders</Filter>
+    </None>
+    <None Include="Feldewar\FWEngine\src\Renderer\Shaders\lightMeshShader.vs">
+      <Filter>Source Files\FWEngine\Renderer\Shaders</Filter>
+    </None>
+    <None Include="Feldewar\FWEngine\src\Renderer\Shaders\lightShader.fs">
+      <Filter>Source Files\FWEngine\Renderer\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

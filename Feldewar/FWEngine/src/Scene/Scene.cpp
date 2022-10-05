@@ -34,14 +34,11 @@ Entity Scene::CreateEntity(const std::string& name)
     m_registry.on_construct<TransformComponent>().connect<&onTransfromConstruct>();
 
     Entity entity = { m_registry.create(), this };
-    entity.AddComponent<TransformComponent>();
+    entity.AddComponent<TransformComponent>(glm::mat4(1.0f));
     auto& tag = entity.AddComponent<TagComponent>();
 
     tag.Tag = name.empty() ? "Entity" : name;
 
-    
-
-    
     return entity;
 }
 

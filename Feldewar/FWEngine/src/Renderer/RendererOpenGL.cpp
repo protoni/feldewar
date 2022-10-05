@@ -24,18 +24,22 @@ namespace ENGINE
         BindVertexArray(m_squareVAO);
 
         loadVertices(vertices, CreateVertexBuffer());
-        loadIndices(indices, CreateVertexBuffer());
 
-        SetVertexAttribPointer(0, 8, 0);
-        SetVertexAttribPointer(1, 8, 3);
-        SetVertexAttribPointer(2, 8, 5);
+        m_squareEBO = CreateVertexBuffer();
+        loadIndices(indices, m_squareEBO);
+
+        SetVertexAttribPointer(0, 3, 8, 0);
+        SetVertexAttribPointer(1, 2, 8, 3);
+        SetVertexAttribPointer(2, 3, 8, 5);
 
         UnBindVertexArray();
+        UnBindBuffer();
     }
 
     void RendererOpenGL::DrawSquare()
     {
         BindVertexArray(m_squareVAO);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_squareEBO);
         glDrawElements(GL_TRIANGLES, square_indices.size(), GL_UNSIGNED_INT, 0);
     }
 
@@ -90,13 +94,20 @@ namespace ENGINE
         glBindVertexArray(0);
     }
 
+    void RendererOpenGL::UnBindBuffer() const
+    {
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    }
+
     void RendererOpenGL::SetVertexAttribPointer(
         unsigned int attrNmbr,
+        unsigned int size,
         unsigned int coordSize,
         unsigned int stride
     )
     {
-        glVertexAttribPointer(attrNmbr, coordSize, GL_FLOAT, GL_FALSE, coordSize * sizeof(float), (void*)(stride * sizeof(float)));
+        glVertexAttribPointer(attrNmbr, size, GL_FLOAT, GL_FALSE, coordSize * sizeof(float), (void*)(stride * sizeof(float)));
         glEnableVertexAttribArray(attrNmbr);
     }
 
@@ -104,8 +115,8 @@ namespace ENGINE
     {
         // Load data to GPU
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(data.at(0)) * data.size(), &data.at(0), GL_STATIC_DRAW);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(data.at(0)) * data.size(), &data.front(), GL_STATIC_DRAW);
+        //glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
     void RendererOpenGL::loadIndices(std::vector<unsigned int>& data, unsigned int vbo) const
@@ -113,7 +124,7 @@ namespace ENGINE
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, data.size() * sizeof(data.at(0)), &data[0], GL_STATIC_DRAW);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     }
 
 
