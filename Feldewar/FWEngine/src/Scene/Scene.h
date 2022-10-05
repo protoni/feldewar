@@ -1,28 +1,31 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-//#include "../FWEngine.h"
+//#include "Renderer.h"
 
 #include <string>
 
-#include <dependencies/entt/entt.hpp>
+#include <entt/entt.hpp>
 
 namespace ENGINE
 {
 
+class Renderer;
 class Entity;
+
 class Scene
 {
-
-//class Entity;
-
 public:
-    Scene();
+    Scene(std::shared_ptr<Renderer>& renderer);
     ~Scene();
 
     Entity CreateEntity(const std::string& name = std::string());
 
+    const bool Update() const;
+
 private:
+    std::shared_ptr<Renderer> m_renderer;
+
     friend class Entity;
     entt::registry m_registry;
     

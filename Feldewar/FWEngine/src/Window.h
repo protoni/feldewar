@@ -7,9 +7,9 @@
 #include <string>
 #include <memory>
 
-#include <dependencies/glad/glad.h>
-#include <dependencies/glm/glm.hpp>
-#include <dependencies/GLFW/glfw3.h>
+#include <glad/glad.h>
+#include <glm/glm.hpp>
+#include <GLFW/glfw3.h>
 
 namespace ENGINE
 {

@@ -3,7 +3,7 @@
 //#include "../FWEngine.h"
 #include "Scene.h"
 
-#include <dependencies/entt/entt.hpp>
+#include <entt/entt.hpp>
 
 namespace ENGINE
 {

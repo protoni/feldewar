@@ -1,6 +1,8 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+//#include "Renderer/Renderer.h"
+
 #include <string>
 
 namespace ENGINE
@@ -9,13 +11,18 @@ namespace ENGINE
 //struct TerrainSettings;
 //struct WindowSettings;
 
-
+enum class RenderAPI
+{
+    Unknown = -1,
+    OpenGL = 0
+};
 
 struct WindowSettings
 {
     std::string name    = "Unknown";
     unsigned int width  = 1600;
     unsigned int height = 800;
+    RenderAPI renderAPI = RenderAPI::OpenGL;
 };
 
 struct DataSettings

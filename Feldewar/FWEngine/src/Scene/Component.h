@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include <dependencies/glm/glm.hpp>
+#include <glm/glm.hpp>
 
 
 namespace ENGINE
@@ -30,6 +30,16 @@ struct TransformComponent
 
     operator glm::mat4& () { return Transform; }
     operator const glm::mat4& () const { return Transform; }
+};
+
+struct PositionComponent
+{
+    glm::vec3 Position;
+
+    PositionComponent() = default;
+    PositionComponent(const PositionComponent&) = default;
+    PositionComponent(const glm::vec3& position)
+        : Position(position) {}
 };
 
 }

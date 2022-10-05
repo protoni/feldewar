@@ -1,8 +1,6 @@
 
-#include "Application.h"
+#include "FWEngine.h"
 #include "DebugMacros.h"
-#include "Error.h"
-#include "Settings.h"
 
 #include "windows.h"
 #include <crtdbg.h>
@@ -23,6 +21,8 @@ _CrtMemState sOld;
 _CrtMemState sNew;
 _CrtMemState sDiff;
 
+using namespace ENGINE;
+
 int main(int argc, char** argv)
 {
     /* Auto dump memory leak info
@@ -35,16 +35,17 @@ int main(int argc, char** argv)
     _CrtMemCheckpoint(&sOld);
 
     // Create new application
-    ENGINE::Application app;
+    Application app;
 
     // Create application settings
-    ENGINE::Settings settings;
+    Settings settings;
     
     // Create window and camera
-    ENGINE::Error err;
+    Error err;
     settings.window.name = "Feldewar";
     settings.window.width = 1600;
     settings.window.height = 800;
+    settings.window.renderAPI = RenderAPI::OpenGL;
     if (!app.Init(settings.window, err)) {
         err.Print();
     }
@@ -64,6 +65,17 @@ int main(int argc, char** argv)
     ///}
 
     // Create a scene
+    Scene& scene = app.CreateScene(err);
+
+    // Create a 2D renderer
+    Renderer& renderer = app.GetRenderer();
+
+    // Create test entity
+    Entity entity = scene.CreateEntity("Test");
+    entity.AddComponent<PositionComponent>(glm::vec3(0.0f, 0.0f, 0.0f));
+
+    entity = scene.CreateEntity("Test2");
+    entity.AddComponent<PositionComponent>(glm::vec3(1.0f, 0.0f, 0.0f));
 
     // Load playable main player entity ( default cube )
     ///FW::Player player = app.LoadPlayer(err);

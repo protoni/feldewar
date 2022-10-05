@@ -8,8 +8,8 @@
 
 #include <memory>
 
-#include <dependencies/glad/glad.h>
-#include <dependencies/GLFW/glfw3.h>
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 namespace ENGINE
 {

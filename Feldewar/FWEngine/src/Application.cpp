@@ -39,11 +39,36 @@ const bool Application::Init(WindowSettings& settings, Error& error)
         error.Set(ErrorMessage::InputCreationError);
         return false;
     }
+
+    // Init renderer
+    m_renderer = std::make_shared<Renderer>();
+    if (!m_renderer->Init(settings.renderAPI)) {
+        error.Set(ErrorMessage::RendererCreationError);
+        return false;
+    }
+
+    m_initialized = true;
+    return true;
 }
 
 void Application::ProcessInput()
 {
     m_input->processInput(m_deltaTime);
+}
+
+Scene& Application::CreateScene(Error& error)
+{
+    if (!m_initialized)
+        error.Set(ErrorMessage::SceneCreationError);
+    else
+        m_scene = std::make_shared<Scene>(m_renderer);
+
+    return *m_scene;
+}
+
+Renderer& Application::GetRenderer()
+{
+    return *m_renderer;
 }
 
 bool Application::Run()
@@ -58,12 +83,14 @@ bool Application::Run()
     std::this_thread::sleep_for(std::chrono::microseconds(static_cast<int>(m_sleep_time)));
 
     // Clear background
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // 120fps -> 130fps
+    m_renderer->ClearScreen(glm::vec4(0.2f, 0.3f, 0.3f, 1.0f), GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // Update frame counter
     m_secondFrame += m_deltaTime;
     m_fpsCounter++;
+
+    // Update scene
+    m_scene->Update();
 
     // Do something every second
     if (m_secondFrame >= 1.0f) {

@@ -6,6 +6,8 @@
 #include "Scene/Entity.h"
 #include "Scene/Scene.h"
 #include "Error.h"
+#include "Settings.h"
 #include "DebugMacros.h"
+#include "Renderer/Renderer.h"
 
 #endif // FW_ENGINE_H
