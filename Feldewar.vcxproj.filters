@@ -114,6 +114,9 @@
     <ClInclude Include="Feldewar\FWEngine\src\Renderer\Mesh.h">
       <Filter>Source Files\FWEngine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\Renderer\Primitives.h">
+      <Filter>Source Files\FWEngine\Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Feldewar\FWEngine\src\Renderer\Shaders\shader.vs">

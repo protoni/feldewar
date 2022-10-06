@@ -2,6 +2,7 @@
 #include "Component.h"
 #include "Entity.h"
 #include "Renderer/Renderer.h"
+#include "Primitives.h"
 
 #include <iostream>
 
@@ -35,8 +36,9 @@ Entity Scene::CreateEntity(const std::string& name)
 
     Entity entity = { m_registry.create(), this };
     entity.AddComponent<TransformComponent>(glm::mat4(1.0f));
+    entity.AddComponent<MeshComponent>(Rectangle());
+    
     auto& tag = entity.AddComponent<TagComponent>();
-
     tag.Tag = name.empty() ? "Entity" : name;
 
     return entity;
@@ -49,13 +51,20 @@ const bool Scene::Update() const
     //    TransformComponent& item = view.get<TransformComponent>(entity);
     //}
 
-    for (auto [entity, position, transformation, tag] : m_registry.view<PositionComponent, TransformComponent, TagComponent>().each()) {
+    for (auto [entity, position, transformation, tag, meshData] :
+        m_registry.view<PositionComponent, TransformComponent, TagComponent, MeshComponent>().each()) {
+
         std::cout << "\n----------------------------------------------" << std::endl;
         std::cout << "Entity ID: " << static_cast<int>(entity) << std::endl;
         std::cout << "Position:  " << position.Position.x << std::endl;
         std::cout << "Tag:       " << tag.Tag << std::endl;
         std::cout << "----------------------------------------------\n" << std::endl;
-        m_renderer->DrawRect(transformation.Transform, position.Position);
+
+        m_renderer->DrawRect(
+            transformation.Transform,
+            position.Position,
+            meshData.mesh
+        );
     }
 
     return false;

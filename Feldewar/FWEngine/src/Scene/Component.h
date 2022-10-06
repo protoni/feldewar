@@ -1,6 +1,8 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
+#include "Mesh.h"
+
 #include <string>
 
 #include <glm/glm.hpp>
@@ -40,6 +42,16 @@ struct PositionComponent
     PositionComponent(const PositionComponent&) = default;
     PositionComponent(const glm::vec3& position)
         : Position(position) {}
+};
+
+struct MeshComponent
+{
+    Mesh mesh;
+
+    MeshComponent() = default;
+    MeshComponent(const MeshComponent&) = default;
+    MeshComponent(const Mesh& meshData)
+        : mesh(meshData) {}
 };
 
 }

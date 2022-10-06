@@ -17,30 +17,30 @@ namespace ENGINE
 
     void RendererOpenGL::LoadSquare()
     {
-        std::vector<float> vertices = square_vertices;
-        std::vector<unsigned int> indices = square_indices;
-
-        m_squareVAO = CreateVertexArray();
-        BindVertexArray(m_squareVAO);
-
-        loadVertices(vertices, CreateVertexBuffer());
-
-        m_squareEBO = CreateVertexBuffer();
-        loadIndices(indices, m_squareEBO);
-
-        SetVertexAttribPointer(0, 3, 8, 0);
-        SetVertexAttribPointer(1, 2, 8, 3);
-        SetVertexAttribPointer(2, 3, 8, 5);
-
-        UnBindVertexArray();
-        UnBindBuffer();
+        //std::vector<float> vertices = square_vertices;
+        //std::vector<unsigned int> indices = square_indices;
+        //
+        //m_squareVAO = CreateVertexArray();
+        //BindVertexArray(m_squareVAO);
+        //
+        //loadVertices(vertices, CreateVertexBuffer());
+        //
+        //m_squareEBO = CreateVertexBuffer();
+        //loadIndices(indices, m_squareEBO);
+        //
+        //SetVertexAttribPointer(0, 3, 8, 0);
+        //SetVertexAttribPointer(1, 2, 8, 3);
+        //SetVertexAttribPointer(2, 3, 8, 5);
+        //
+        //UnBindVertexArray();
+        //UnBindBuffer();
     }
 
-    void RendererOpenGL::DrawSquare()
+    void RendererOpenGL::DrawSquare(const BufferObject& buf) const
     {
-        BindVertexArray(m_squareVAO);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_squareEBO);
-        glDrawElements(GL_TRIANGLES, square_indices.size(), GL_UNSIGNED_INT, 0);
+        BindVertexArray(buf.VAO);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buf.EBO);
+        glDrawElements(GL_TRIANGLES, buf.IndiceCount, GL_UNSIGNED_INT, 0);
     }
 
     void RendererOpenGL::ClearScreen(glm::vec4 color, int settings) const
@@ -51,6 +51,36 @@ namespace ENGINE
 
     void RendererOpenGL::DrawRect(const glm::mat4& transform, const glm::vec3& position)
     {
+    }
+
+    void RendererOpenGL::LoadData(
+        const std::vector<float>& vertices,
+        const std::vector<unsigned int>& indices,
+        BufferObject& buf
+    )
+    {
+        // Create buffers
+        buf.VAO = CreateVertexArray();
+        buf.VBO = CreateVertexBuffer();
+        buf.EBO = CreateVertexBuffer();
+
+        // Bind vertex array
+        BindVertexArray(buf.VAO);
+
+        // Load vertex data
+        LoadVertices(vertices, buf.VBO);
+
+        // Load index data
+        LoadIndices(indices, buf.EBO);
+
+        // Setup VAO
+        SetVertexAttribPointer(0, 3, 8, 0);
+        SetVertexAttribPointer(1, 2, 8, 3);
+        SetVertexAttribPointer(2, 3, 8, 5);
+        
+        // Unbind buffers
+        UnBindVertexArray();
+        UnBindBuffer();
     }
 
     bool RendererOpenGL::Init()
@@ -65,7 +95,7 @@ namespace ENGINE
     {
         unsigned int VBO;
         glGenBuffers(1, &VBO);
-        m_VBOs.push_back(VBO);
+        //m_VBOs.push_back(VBO);
 
         return VBO;
     }
@@ -74,7 +104,7 @@ namespace ENGINE
     {
         unsigned int VAO;
         glGenVertexArrays(1, &VAO);
-        m_VAOs.push_back(VAO);
+        //m_VAOs.push_back(VAO);
 
         return VAO;
     }
@@ -84,7 +114,7 @@ namespace ENGINE
         glBindBuffer(GL_ARRAY_BUFFER, buffer);
     }
 
-    void RendererOpenGL::BindVertexArray(unsigned int array)
+    void RendererOpenGL::BindVertexArray(const unsigned int array)
     {
         glBindVertexArray(array);
     }
@@ -94,7 +124,7 @@ namespace ENGINE
         glBindVertexArray(0);
     }
 
-    void RendererOpenGL::UnBindBuffer() const
+    void RendererOpenGL::UnBindBuffer()
     {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -111,7 +141,7 @@ namespace ENGINE
         glEnableVertexAttribArray(attrNmbr);
     }
 
-    void RendererOpenGL::loadVertices(std::vector<float>& data, unsigned int vbo) const
+    void RendererOpenGL::LoadVertices(const std::vector<float>& data, const unsigned int vbo)
     {
         // Load data to GPU
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -119,7 +149,7 @@ namespace ENGINE
         //glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
-    void RendererOpenGL::loadIndices(std::vector<unsigned int>& data, unsigned int vbo) const
+    void RendererOpenGL::LoadIndices(const std::vector<unsigned int>& data, const unsigned int vbo)
     {
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo);

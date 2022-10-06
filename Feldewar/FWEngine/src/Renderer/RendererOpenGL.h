@@ -8,66 +8,91 @@
 namespace ENGINE
 {
 
-    class RendererOpenGL
-    {
-    public:
-        RendererOpenGL();
-        ~RendererOpenGL();
+struct BufferObject
+{
+    unsigned int VAO;
+    unsigned int VBO;
+    unsigned int EBO;
 
-        bool Init();
+    unsigned int VerticeCount;
+    unsigned int IndiceCount;
 
-        // Load vertex data
-        void loadVertices(std::vector<float>& data, unsigned int vbo) const;
+    BufferObject()
+        : VAO(0)
+        , VBO(0)
+        , EBO(0)
+        , VerticeCount(0)
+        , IndiceCount(0)
+    {}
+};
 
-        // Load index data
-        void loadIndices(std::vector<unsigned int>& data, unsigned int vbo) const;
+class RendererOpenGL
+{
+public:
+    RendererOpenGL();
+    ~RendererOpenGL();
 
-        // Define an array of generic vertex attribute data
-        void SetVertexAttribPointer(
-            unsigned int attrNmbr,
-            unsigned int size,
-            unsigned int coordSize,
-            unsigned int stride
-        );
+    bool Init();
 
-        // Load square vertices and indices to GPU
-        void LoadSquare();
+    // Load vertex data
+    static void LoadVertices(const std::vector<float>& data, const unsigned int vbo);
 
-        // Create Vertex buffer object and return the ID
-        unsigned int CreateVertexBuffer();
+    // Load index data
+    static void LoadIndices(const std::vector<unsigned int>& data, const unsigned int vbo);
 
-        // Create Vertex array object and return the ID
-        unsigned int CreateVertexArray();
+    // Define an array of generic vertex attribute data
+    static void SetVertexAttribPointer(
+        const unsigned int attrNmbr,
+        const unsigned int size,
+        const unsigned int coordSize,
+        const unsigned int stride
+    );
 
-        // Bind vertex buffer
-        void BindVertexBuffer(unsigned int buffer);
+    // Load square vertices and indices to GPU
+    void LoadSquare();
 
-        // Bind vertex array
-        void BindVertexArray(unsigned int array);
+    // Create Vertex buffer object and return the ID
+    static unsigned int CreateVertexBuffer();
 
-        // Un bind vertex array
-        void UnBindVertexArray();
+    // Create Vertex array object and return the ID
+    static unsigned int CreateVertexArray();
 
-        // Unbind vertex and element array buffers
-        void UnBindBuffer() const;
+    // Bind vertex buffer
+    static void BindVertexBuffer(const unsigned int buffer);
 
-        // Draw primitive square
-        void DrawSquare();
+    // Bind vertex array
+    static void BindVertexArray(const unsigned int array);
 
-        // Clear screen
-        void ClearScreen(glm::vec4 color, int settings) const;
+    // Un bind vertex array
+    static void UnBindVertexArray();
 
-        // Draw rectangle
-        void DrawRect(const glm::mat4& transform, const glm::vec3& position);
+    // Unbind vertex and element array buffers
+    static void UnBindBuffer();
 
-    private:
-        std::vector<unsigned int> m_VBOs;
-        std::vector<unsigned int> m_VAOs;
+    // Draw primitive square
+    void DrawSquare(const BufferObject& buf) const;
 
-        // Primitives
-        unsigned int m_squareVAO;
-        unsigned int m_squareEBO;
-    };
+    // Clear screen
+    void ClearScreen(glm::vec4 color, int settings) const;
+
+    // Draw rectangle
+    void DrawRect(const glm::mat4& transform, const glm::vec3& position);
+
+    // Load vertex data to the GPU
+    static void LoadData(
+        const std::vector<float>& vertices,
+        const std::vector<unsigned int>& indices,
+        BufferObject& buf
+    );
+
+private:
+    std::vector<unsigned int> m_VBOs;
+    std::vector<unsigned int> m_VAOs;
+
+    // Primitives
+    unsigned int m_squareVAO;
+    unsigned int m_squareEBO;
+};
 
 }
 

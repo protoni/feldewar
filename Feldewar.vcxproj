@@ -40,6 +40,7 @@
     <ClInclude Include="Feldewar\FWEngine\src\FWEngine.h" />
     <ClInclude Include="Feldewar\FWEngine\src\Input.h" />
     <ClInclude Include="Feldewar\FWEngine\src\Renderer\Mesh.h" />
+    <ClInclude Include="Feldewar\FWEngine\src\Renderer\Primitives.h" />
     <ClInclude Include="Feldewar\FWEngine\src\Renderer\Renderer.h" />
     <ClInclude Include="Feldewar\FWEngine\src\Renderer\RendererOpenGL.h" />
     <ClInclude Include="Feldewar\FWEngine\src\Renderer\Shader.h" />

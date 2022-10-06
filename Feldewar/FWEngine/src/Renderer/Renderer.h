@@ -7,6 +7,7 @@
 #include "Settings.h"
 #include "Camera.h"
 
+
 #include <memory>
 
 #include <glad/glad.h>
@@ -18,6 +19,8 @@
 
 namespace ENGINE
 {
+
+class Mesh;
 class Renderer
 {
 
@@ -32,7 +35,21 @@ public:
     void ClearScreen(glm::vec4 color, int settings) const;
 
     // Draw rectangle
-    void DrawRect(const glm::mat4& transform, const glm::vec3& position);
+    void DrawRect(
+        const glm::mat4& transform,
+        const glm::vec3& position,
+        const Mesh& mesh
+    );
+
+    // Load vertex data to the GPU
+    static const bool LoadData(
+        const std::vector<float>& vertices,
+        const std::vector<unsigned int>& indices,
+        BufferObject& buf
+    );
+
+    // Get basic mesh shader with lights support
+    const Shader& GetMeshShader() const { return *m_lightMeshShader; }
 
 private:
     // Activate shader and set projection matrix
@@ -60,6 +77,8 @@ private:
     // Shaders
     std::shared_ptr<Shader> m_lightShader = nullptr;
     std::shared_ptr<Shader> m_lightMeshShader = nullptr;
+
+    static RenderAPI s_rendererType;
 };
 
 }

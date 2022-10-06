@@ -67,9 +67,6 @@ int main(int argc, char** argv)
     // Create a scene
     Scene& scene = app.CreateScene(err);
 
-    // Create a 2D renderer
-    Renderer& renderer = app.GetRenderer();
-
     // Create test entity
     Entity entity = scene.CreateEntity("Test");
     entity.AddComponent<PositionComponent>(glm::vec3(0.0f, 0.0f, 0.0f));
@@ -82,6 +79,11 @@ int main(int argc, char** argv)
     ///if (err.IsErr()) {
     ///    err.Print();
     ///}
+
+    //Rectangle rect = scene.AddRectangle(); // Moves with the world
+    //Rectangle staticRect = scene.AddStaticRectangle(); // Screen coordinates
+
+
 
     while (app.Run()) {
         app.ProcessInput();

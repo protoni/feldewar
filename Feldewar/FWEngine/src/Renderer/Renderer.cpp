@@ -1,4 +1,5 @@
 #include "Renderer.h"
+#include "Primitives.h"
 
 #include <iostream>
 #include <filesystem>
@@ -6,13 +7,14 @@
 namespace ENGINE
 {
 
+RenderAPI Renderer::s_rendererType = RenderAPI::OpenGL;
+
 Renderer::Renderer(std::shared_ptr<Camera>& camera) : m_camera(camera)
 {
     // Create graphics API object
     m_rendererOpenGL = std::make_unique<RendererOpenGL>();
 
     // Build shaders
-    //std::stringstream ss << std::filesystem::current_path().c_str();
     m_lightShader = std::make_shared<Shader>(
         "Feldewar/FWEngine/src/Renderer/Shaders/shader.vs", 
         "Feldewar/FWEngine/src/Renderer/Shaders/lightShader.fs"
@@ -91,23 +93,17 @@ void Renderer::applyTranslations(
     shader->setMat4("model", glm::translate(transform, position));
 }
 
-void Renderer::DrawRect(const glm::mat4& transform, const glm::vec3& position)
+void Renderer::DrawRect(const glm::mat4& transform,
+    const glm::vec3& position,
+    const Mesh& mesh
+)
 {
-    // Get the current projection matrix
-    glm::mat4 projection = glm::perspective(
-        glm::radians(m_camera->Zoom),
-        (float)m_windowSettings.width / (float)m_windowSettings.height, 0.1f, 100.0f
-    );
-
-    // Get the current view matrix
-    glm::mat4 view = m_camera->GetViewMatrix();
-
     switch (m_rendererType)
     {
     case RenderAPI::OpenGL:
         activateShader(m_lightMeshShader);
         applyTranslations(m_lightMeshShader, transform, position);
-        m_rendererOpenGL->DrawSquare();
+        m_rendererOpenGL->DrawSquare(mesh.GetBuffer());
         break;
 
     case RenderAPI::Unknown:
@@ -115,6 +111,30 @@ void Renderer::DrawRect(const glm::mat4& transform, const glm::vec3& position)
         std::cout << "Can't ClearScreen! Unknown renderer API given!" << std::endl;
         break;
     }
+}
+
+const bool Renderer::LoadData(
+    const std::vector<float>& vertices,
+    const std::vector<unsigned int>& indices,
+    BufferObject& buf
+)
+{
+    bool ret = false;
+
+    switch (s_rendererType)
+    {
+    case RenderAPI::OpenGL:
+        RendererOpenGL::LoadData(vertices, indices, buf);
+        ret = true;
+        break;
+
+    case RenderAPI::Unknown:
+    default:
+        std::cout << "Can't ClearScreen! Unknown renderer API given!" << std::endl;
+        break;
+    }
+
+    return ret;
 }
 
 } // namespace ENGINE
