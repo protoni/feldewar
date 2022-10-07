@@ -3,23 +3,24 @@
 
 #include "Mesh.h"
 #include "Shapes.h"
-#include "Shader.h"
 
 namespace ENGINE
 {
-
-class Rectangle : public Mesh
+namespace PRIMITIVES
 {
 
-public:
-    BufferObject BufferData;
+    // 2D rectangle primitive
+    class Rectangle2D : public Mesh
+    {
 
-    Rectangle() : Mesh(square_vertices, square_indices, BufferData) {}
-    ~Rectangle() {}
+    public:
+        Rectangle2D()
+            : Mesh(rectangle_vertices, rectangle_indices) {}
+        ~Rectangle2D() {}
+    };
 
-    //const BufferObject& GetBuffer() const { return BufferData; }
-};
 
-}
+} // namespace PRIMITIVES
+} // namespace ENGINE
 
 #endif // PRIMITIVES_H

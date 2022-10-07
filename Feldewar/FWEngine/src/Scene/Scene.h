@@ -3,6 +3,7 @@
 
 //#include "Renderer.h"
 
+
 #include <string>
 
 #include <entt/entt.hpp>
@@ -22,6 +23,8 @@ public:
     Entity CreateEntity(const std::string& name = std::string());
 
     const bool Update() const;
+
+    Entity AddRectangle2D(const std::string& name = std::string());
 
 private:
     std::shared_ptr<Renderer> m_renderer;

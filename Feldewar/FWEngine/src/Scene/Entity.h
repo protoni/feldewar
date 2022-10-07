@@ -2,8 +2,10 @@
 #define ENTITY_H
 //#include "../FWEngine.h"
 #include "Scene.h"
+#include "Component.h"
 
 #include <entt/entt.hpp>
+#include <glm/glm.hpp>
 
 namespace ENGINE
 {
@@ -11,7 +13,7 @@ namespace ENGINE
 class Entity
 {
 public:
-    //Entity() = default;
+    Entity() = default;
     Entity(entt::entity handle, Scene* scene);
     ~Entity();
 
@@ -40,6 +42,15 @@ public:
     {
         m_scene->m_registry.remove<T>(m_entityHandle);
     }
+
+    // Moving
+    const bool Move(const glm::vec3& pos);
+    const bool MoveLeft(const float amount);
+    const bool MoveRight(const float amount);
+    const bool MoveUp(const float amount);
+    const bool MoveDown(const float amount);
+
+    //const entt::entity GetHandle() const { return m_entityHandle; }
 
     operator bool() const { return m_entityHandle != entt::null; }
 

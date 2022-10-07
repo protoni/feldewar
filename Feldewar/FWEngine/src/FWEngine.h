@@ -9,5 +9,6 @@
 #include "Settings.h"
 #include "DebugMacros.h"
 #include "Renderer/Renderer.h"
+#include "Renderer/Primitives.h"
 
 #endif // FW_ENGINE_H

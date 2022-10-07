@@ -6,7 +6,7 @@
 namespace ENGINE
 {
 
-static const std::vector<float> square_vertices = {
+static const std::vector<float> rectangle_vertices = {
     // Location             // Texture coords    // Normals
     -0.5f,  0.5f, 0.0f,     0.0f, 0.0f,          0.0f, 1.0f, 0.0f,  // far left
      0.5f,  0.5f, 0.0f,     0.0f, 0.0f,          0.0f, 1.0f, 0.0f,  // far rigt
@@ -14,7 +14,7 @@ static const std::vector<float> square_vertices = {
     -0.5f, -0.5f, 0.0f,     0.0f, 0.0f,          0.0f, 1.0f, 0.0f   // near left
 };
 
-static const std::vector<unsigned int> square_indices = {
+static const std::vector<unsigned int> rectangle_indices = {
     0, 1, 2,
     2, 3, 0
 };

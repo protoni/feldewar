@@ -67,26 +67,32 @@ int main(int argc, char** argv)
     // Create a scene
     Scene& scene = app.CreateScene(err);
 
-    // Create test entity
-    Entity entity = scene.CreateEntity("Test");
-    entity.AddComponent<PositionComponent>(glm::vec3(0.0f, 0.0f, 0.0f));
-
-    entity = scene.CreateEntity("Test2");
-    entity.AddComponent<PositionComponent>(glm::vec3(2.0f, 0.0f, 0.0f));
-
+    // Create test rect
+    Entity rect = scene.AddRectangle2D();
+    
     // Load playable main player entity ( default cube )
     ///FW::Player player = app.LoadPlayer(err);
     ///if (err.IsErr()) {
     ///    err.Print();
     ///}
 
-    //Rectangle rect = scene.AddRectangle(); // Moves with the world
-    //Rectangle staticRect = scene.AddStaticRectangle(); // Screen coordinates
-
-
-
+    float movePtr = 0.0f;
+    float moveAmount = 0.01f;
     while (app.Run()) {
         app.ProcessInput();
+
+        if (movePtr <= 2.0f)
+            rect.MoveLeft(moveAmount);
+        else if (movePtr > 2.0f && movePtr <= 4.0f)
+            rect.MoveUp(moveAmount);
+        else if (movePtr > 4.0f && movePtr <= 6.0f)
+            rect.MoveRight(moveAmount);
+        else if (movePtr > 6.0f && movePtr <= 8.0f)
+            rect.MoveDown(moveAmount);
+        else
+            movePtr = 0.0f;
+
+       movePtr += moveAmount;
     }
 
     app.Cleanup();

@@ -36,7 +36,6 @@ Entity Scene::CreateEntity(const std::string& name)
 
     Entity entity = { m_registry.create(), this };
     entity.AddComponent<TransformComponent>(glm::mat4(1.0f));
-    entity.AddComponent<MeshComponent>(Rectangle());
     
     auto& tag = entity.AddComponent<TagComponent>();
     tag.Tag = name.empty() ? "Entity" : name;
@@ -68,6 +67,19 @@ const bool Scene::Update() const
     }
 
     return false;
+}
+
+Entity Scene::AddRectangle2D(const std::string& name)
+{
+    Entity entity = CreateEntity("Rectangle2D");
+    entity.AddComponent<PositionComponent>(glm::vec3(0.0f, 0.0f, 0.0f));
+
+    PRIMITIVES::Rectangle2D rect = PRIMITIVES::Rectangle2D();
+    //rect.SetEntityHandle(entity);
+
+    entity.AddComponent<MeshComponent>(rect);
+
+    return entity;
 }
 
 }

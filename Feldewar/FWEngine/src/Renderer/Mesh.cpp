@@ -15,10 +15,9 @@ namespace ENGINE
 
 Mesh::Mesh(
     const std::vector<float>& vertices,
-    const std::vector<unsigned int>& indices,
-    BufferObject& bufferData
+    const std::vector<unsigned int>& indices
 ) :
-    m_vertices(vertices), m_indices(indices), m_buf(bufferData)
+    m_vertices(vertices), m_indices(indices)
 {
     create();
 }

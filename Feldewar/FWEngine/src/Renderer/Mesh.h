@@ -14,8 +14,7 @@ class Mesh
 public:
     Mesh(
         const std::vector<float>& vertices,
-        const std::vector<unsigned int>& indices,
-        BufferObject& bufferData
+        const std::vector<unsigned int>& indices
     );
 
     ~Mesh();
