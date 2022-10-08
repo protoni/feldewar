@@ -7,7 +7,6 @@
 #include "Settings.h"
 #include "Camera.h"
 
-
 #include <memory>
 
 #include <glad/glad.h>
@@ -21,6 +20,7 @@ namespace ENGINE
 {
 
 class Mesh;
+class Terrain;
 class Renderer
 {
 
@@ -41,11 +41,23 @@ public:
         const Mesh& mesh
     );
 
+    // Render terrain
+    void DrawTerrain(const glm::mat4& transform, const Terrain& terrain);
+
     // Load vertex data to the GPU
     static const bool LoadData(
         const std::vector<float>& vertices,
         const std::vector<unsigned int>& indices,
         BufferObject& buf
+    );
+
+    // Load separated vertex, texture and normal data to the GPU
+    static const bool LoadData(
+        const std::vector<float>& vertices,
+        const std::vector<float>& textureCoords,
+        const std::vector<float>& normals,
+        const std::vector<unsigned int>& indices,
+        BufferObjectSeparated& buf
     );
 
     // Get basic mesh shader with lights support
@@ -55,11 +67,25 @@ private:
     // Activate shader and set projection matrix
     void activateShader(std::shared_ptr<Shader>& shader);
 
+    // Translate ans scale a matrix
+    void applyTranslations(
+        std::shared_ptr<Shader>& shader,
+        const glm::mat4& transform,
+        const glm::vec3& position,
+        const glm::vec3& scale
+    );
+
     // Translate a matrix
     void applyTranslations(
         std::shared_ptr<Shader>& shader,
         const glm::mat4& transform,
         const glm::vec3& position
+    );
+
+    // Apply a model matrix with default position
+    void applyTranslations(
+        std::shared_ptr<Shader>& shader,
+        const glm::mat4& transform
     );
 
     // Currently used renderer API

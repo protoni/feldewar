@@ -243,7 +243,7 @@ vec3 calculateSpotLight(SpotLight light, vec3 viewPos, bool materialOverride)
 void main()
 {
     bool selected = false;
-    float defaultAmbience = 0.07;
+    float defaultAmbience = 1.0;//0.07;
     
     // Calculate default ambient lighting
     vec3 ambient = defaultAmbience * vec3(texture(material.diffuse, TexCoord));

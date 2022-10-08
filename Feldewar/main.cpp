@@ -57,19 +57,18 @@ int main(int argc, char** argv)
     ///    err.Print();
     ///}
 
-    // Load terrain
-    settings.terrain.heightMap = "heightmap.png";
-    settings.terrain.size = 800.0f;
-    ///if (!app.LoadTerrain(settings.terrain)) {
-    ///    err.Print();
-    ///}
-
     // Create a scene
     Scene& scene = app.CreateScene(err);
 
     // Create test rect
-    Entity rect = scene.AddRectangle2D();
+    Entity rect = scene.AddRectangle2D("Rect2d");
     
+    // Load terrain
+    settings.terrain.heightMap = "Feldewar/Textures/heightmap.png";
+    settings.terrain.texture = "Feldewar/Textures/grass.png";
+    settings.terrain.size = 800.0f;
+    Entity terrain = scene.AddTerrain(settings.terrain);
+
     // Load playable main player entity ( default cube )
     ///FW::Player player = app.LoadPlayer(err);
     ///if (err.IsErr()) {
@@ -80,6 +79,7 @@ int main(int argc, char** argv)
     float moveAmount = 0.01f;
     while (app.Run()) {
         app.ProcessInput();
+
 
         if (movePtr <= 2.0f)
             rect.MoveLeft(moveAmount);

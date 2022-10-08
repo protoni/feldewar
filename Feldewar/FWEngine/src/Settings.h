@@ -34,6 +34,7 @@ struct DataSettings
 struct TerrainSettings
 {
     std::string heightMap = "heightmap.png";
+    std::string texture = "grass.png";
     float size = 800.0f;
 };
 

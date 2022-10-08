@@ -1,7 +1,8 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-//#include "Renderer.h"
+#include "Settings.h"
+#include "Error.h"
 
 
 #include <string>
@@ -25,6 +26,9 @@ public:
     const bool Update() const;
 
     Entity AddRectangle2D(const std::string& name = std::string());
+
+    // Load terrain related data
+    Entity AddTerrain(const TerrainSettings& settings);
 
 private:
     std::shared_ptr<Renderer> m_renderer;

@@ -53,6 +53,13 @@ namespace ENGINE
     {
     }
 
+    void RendererOpenGL::DrawTerrain(const BufferObjectSeparated& buf) const
+    {
+        BindVertexArray(buf.VAO);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buf.VBOIndex);
+        glDrawElements(GL_TRIANGLES, buf.IndexCount, GL_UNSIGNED_INT, 0);
+    }
+
     void RendererOpenGL::LoadData(
         const std::vector<float>& vertices,
         const std::vector<unsigned int>& indices,
@@ -77,6 +84,41 @@ namespace ENGINE
         SetVertexAttribPointer(0, 3, 8, 0);
         SetVertexAttribPointer(1, 2, 8, 3);
         SetVertexAttribPointer(2, 3, 8, 5);
+        
+        // Unbind buffers
+        UnBindVertexArray();
+        UnBindBuffer();
+    }
+
+    void RendererOpenGL::LoadData(
+        const std::vector<float>& vertices,
+        const std::vector<float>& textureCoords,
+        const std::vector<float>& normals,
+        const std::vector<unsigned int>& indices,
+        BufferObjectSeparated& buf)
+    {
+        // Create buffers
+        buf.VAO = CreateVertexArray();
+        buf.VBOVertex = CreateVertexBuffer();
+        buf.VBOTexture = CreateVertexBuffer();
+        buf.VBONormal = CreateVertexBuffer();
+        buf.VBOIndex = CreateVertexBuffer();
+
+        // Bind vertex array
+        BindVertexArray(buf.VAO);
+
+        // Load index data
+        LoadIndices(indices, buf.VBOIndex);
+
+        // Load vertex, texture coordinate and normal data + setup VAOs
+        LoadVertices(vertices, buf.VBOVertex);
+        SetVertexAttribPointer(0, 3, 3, 0);
+
+        LoadVertices(textureCoords, buf.VBOTexture);
+        SetVertexAttribPointer(1, 2, 2, 3);
+
+        LoadVertices(normals, buf.VBONormal);
+        SetVertexAttribPointer(2, 3, 3, 5);
         
         // Unbind buffers
         UnBindVertexArray();

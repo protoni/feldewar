@@ -66,6 +66,8 @@ bool Window::init()
     // Set pointer to this object
     glfwSetWindowUserPointer(m_window, this);
 
+    //setWireframeMode(true);
+
     return true;
 }
 

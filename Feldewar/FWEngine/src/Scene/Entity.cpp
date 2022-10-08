@@ -12,7 +12,6 @@ Entity::~Entity()
 {
 }
 
-// Moving
 const bool Entity::Move(const glm::vec3& pos)
 {
     if (HasComponent<PositionComponent>()) {

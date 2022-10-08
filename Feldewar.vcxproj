@@ -20,19 +20,23 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Feldewar\FWEngine\dependencies\glad\glad.c" />
+    <ClCompile Include="Feldewar\FWEngine\dependencies\stb_image\stb_image.cpp" />
     <ClCompile Include="Feldewar\FWEngine\src\Application.cpp" />
     <ClCompile Include="Feldewar\FWEngine\src\Input.cpp" />
     <ClCompile Include="Feldewar\FWEngine\src\Renderer\Mesh.cpp" />
     <ClCompile Include="Feldewar\FWEngine\src\Renderer\Renderer.cpp" />
     <ClCompile Include="Feldewar\FWEngine\src\Renderer\RendererOpenGL.cpp" />
+    <ClCompile Include="Feldewar\FWEngine\src\Renderer\Texture.cpp" />
     <ClCompile Include="Feldewar\FWEngine\src\Scene\Entity.cpp" />
     <ClCompile Include="Feldewar\FWEngine\src\Scene\Scene.cpp" />
+    <ClCompile Include="Feldewar\FWEngine\src\Terrain.cpp" />
     <ClCompile Include="Feldewar\FWEngine\src\Window.cpp" />
     <ClCompile Include="Feldewar\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Feldewar\FWEngine\dependencies\entt\entt.hpp" />
     <ClInclude Include="Feldewar\FWEngine\dependencies\glad\glad.h" />
+    <ClInclude Include="Feldewar\FWEngine\dependencies\stb_image\stb_image.h" />
     <ClInclude Include="Feldewar\FWEngine\src\Application.h" />
     <ClInclude Include="Feldewar\FWEngine\src\Camera.h" />
     <ClInclude Include="Feldewar\FWEngine\src\DebugMacros.h" />
@@ -45,10 +49,12 @@
     <ClInclude Include="Feldewar\FWEngine\src\Renderer\RendererOpenGL.h" />
     <ClInclude Include="Feldewar\FWEngine\src\Renderer\Shader.h" />
     <ClInclude Include="Feldewar\FWEngine\src\Renderer\Shapes.h" />
+    <ClInclude Include="Feldewar\FWEngine\src\Renderer\Texture.h" />
     <ClInclude Include="Feldewar\FWEngine\src\Scene\Component.h" />
     <ClInclude Include="Feldewar\FWEngine\src\Scene\Entity.h" />
     <ClInclude Include="Feldewar\FWEngine\src\Scene\Scene.h" />
     <ClInclude Include="Feldewar\FWEngine\src\Settings.h" />
+    <ClInclude Include="Feldewar\FWEngine\src\Terrain.h" />
     <ClInclude Include="Feldewar\FWEngine\src\Window.h" />
   </ItemGroup>
   <ItemGroup>
@@ -131,7 +137,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\Feldewar\FWEngine;.\Feldewar\FWEngine\src;.\Feldewar\FWEngine\src\Renderer;.\Feldewar\FWEngine\src\Renderer\Shaders;.\Feldewar\FWEngine\dependencies;.\Feldewar\FWEngine\dependencies\GLFW;.\Feldewar\FWEngine\dependencies\entt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Feldewar\FWEngine;.\Feldewar\FWEngine\src;.\Feldewar\FWEngine\src\Renderer;.\Feldewar\FWEngine\src\Renderer\Shaders;.\Feldewar\FWEngine\dependencies;.\Feldewar\FWEngine\dependencies\GLFW;.\Feldewar\FWEngine\dependencies\stb_image;.\Feldewar\FWEngine\dependencies\entt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -150,7 +156,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\Feldewar\FWEngine;.\Feldewar\FWEngine\src;.\Feldewar\FWEngine\src\Renderer;.\Feldewar\FWEngine\src\Renderer\Shaders;.\Feldewar\FWEngine\dependencies;.\Feldewar\FWEngine\dependencies\GLFW;.\Feldewar\FWEngine\dependencies\entt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Feldewar\FWEngine;.\Feldewar\FWEngine\src;.\Feldewar\FWEngine\src\Renderer;.\Feldewar\FWEngine\src\Renderer\Shaders;.\Feldewar\FWEngine\dependencies;.\Feldewar\FWEngine\dependencies\GLFW;.\Feldewar\FWEngine\dependencies\stb_image;.\Feldewar\FWEngine\dependencies\entt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -169,7 +175,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\Feldewar\FWEngine;.\Feldewar\FWEngine\src;.\Feldewar\FWEngine\src\Renderer;.\Feldewar\FWEngine\src\Renderer\Shaders;.\Feldewar\FWEngine\dependencies;.\Feldewar\FWEngine\dependencies\GLFW;.\Feldewar\FWEngine\dependencies\entt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Feldewar\FWEngine;.\Feldewar\FWEngine\src;.\Feldewar\FWEngine\src\Renderer;.\Feldewar\FWEngine\src\Renderer\Shaders;.\Feldewar\FWEngine\dependencies;.\Feldewar\FWEngine\dependencies\GLFW;.\Feldewar\FWEngine\dependencies\stb_image;.\Feldewar\FWEngine\dependencies\entt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -188,7 +194,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\Feldewar\FWEngine;.\Feldewar\FWEngine\src;.\Feldewar\FWEngine\src\Renderer;.\Feldewar\FWEngine\src\Renderer\Shaders;.\Feldewar\FWEngine\dependencies;.\Feldewar\FWEngine\dependencies\GLFW;.\Feldewar\FWEngine\dependencies\entt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Feldewar\FWEngine;.\Feldewar\FWEngine\src;.\Feldewar\FWEngine\src\Renderer;.\Feldewar\FWEngine\src\Renderer\Shaders;.\Feldewar\FWEngine\dependencies;.\Feldewar\FWEngine\dependencies\GLFW;.\Feldewar\FWEngine\dependencies\stb_image;.\Feldewar\FWEngine\dependencies\entt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>

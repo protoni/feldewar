@@ -26,6 +26,32 @@ struct BufferObject
     {}
 };
 
+struct BufferObjectSeparated
+{
+    unsigned int VAO;
+    unsigned int VBOVertex;
+    unsigned int VBOTexture;
+    unsigned int VBONormal;
+    unsigned int VBOIndex;
+
+    unsigned int VertexCount;
+    unsigned int VertexCountTexture;
+    unsigned int VertexCountNormal;
+
+    unsigned int IndexCount;
+
+    BufferObjectSeparated()
+        : VAO(0)
+        , VBOVertex(0)
+        , VBOTexture(0)
+        , VBONormal(0)
+        , VertexCount(0)
+        , VertexCountTexture(0)
+        , VertexCountNormal(0)
+        , IndexCount(0)
+    {}
+};
+
 class RendererOpenGL
 {
 public:
@@ -72,6 +98,9 @@ public:
     // Draw primitive square
     void DrawSquare(const BufferObject& buf) const;
 
+    // Draw terrain
+    void DrawTerrain(const BufferObjectSeparated& buf) const;
+
     // Clear screen
     void ClearScreen(glm::vec4 color, int settings) const;
 
@@ -83,6 +112,15 @@ public:
         const std::vector<float>& vertices,
         const std::vector<unsigned int>& indices,
         BufferObject& buf
+    );
+
+    // Load separated vertex, texture and normal data to the GPU
+    static void LoadData(
+        const std::vector<float>& vertices,
+        const std::vector<float>& textureCoords,
+        const std::vector<float>& normals,
+        const std::vector<unsigned int>& indices,
+        BufferObjectSeparated& buf
     );
 
 private:

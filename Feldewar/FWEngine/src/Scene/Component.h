@@ -2,6 +2,7 @@
 #define COMPONENT_H
 
 #include "Mesh.h"
+#include "Terrain.h"
 
 #include <string>
 
@@ -52,6 +53,16 @@ struct MeshComponent
     MeshComponent(const MeshComponent&) = default;
     MeshComponent(const Mesh& meshData)
         : mesh(meshData) {}
+};
+
+struct TerrainComponent
+{
+    std::shared_ptr<Terrain> terrain;
+
+    TerrainComponent() = default;
+    TerrainComponent(const TerrainComponent&) = default;
+    TerrainComponent(const std::shared_ptr<Terrain>& terrainData)
+        : terrain(terrainData) {}
 };
 
 }

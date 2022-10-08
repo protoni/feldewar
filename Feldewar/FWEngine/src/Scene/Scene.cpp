@@ -5,6 +5,7 @@
 #include "Primitives.h"
 
 #include <iostream>
+#include <memory>
 
 namespace ENGINE
 {
@@ -53,17 +54,27 @@ const bool Scene::Update() const
     for (auto [entity, position, transformation, tag, meshData] :
         m_registry.view<PositionComponent, TransformComponent, TagComponent, MeshComponent>().each()) {
 
-        std::cout << "\n----------------------------------------------" << std::endl;
-        std::cout << "Entity ID: " << static_cast<int>(entity) << std::endl;
-        std::cout << "Position:  " << position.Position.x << std::endl;
-        std::cout << "Tag:       " << tag.Tag << std::endl;
-        std::cout << "----------------------------------------------\n" << std::endl;
+            std::cout << "\n------------------OBJECTS---------------------" << std::endl;
+            std::cout << "Entity ID: " << static_cast<int>(entity) << std::endl;
+            std::cout << "Position:  " << position.Position.x << std::endl;
+            std::cout << "Tag:       " << tag.Tag << std::endl;
+            std::cout << "----------------------------------------------\n" << std::endl;
 
-        m_renderer->DrawRect(
-            transformation.Transform,
-            position.Position,
-            meshData.mesh
-        );
+            m_renderer->DrawRect(
+                transformation.Transform,
+                position.Position,
+                meshData.mesh
+            );
+    }
+
+    for (auto [entity, transformation, terrainData] :
+        m_registry.view<TransformComponent, TerrainComponent>().each()) {
+            
+            std::cout << "\n------------------TERRAIN --------------------" << std::endl;
+            std::cout << "Entity ID: " << static_cast<int>(entity) << std::endl;
+            std::cout << "----------------------------------------------\n" << std::endl;
+
+            m_renderer->DrawTerrain(transformation.Transform, *terrainData.terrain);
     }
 
     return false;
@@ -71,13 +82,24 @@ const bool Scene::Update() const
 
 Entity Scene::AddRectangle2D(const std::string& name)
 {
-    Entity entity = CreateEntity("Rectangle2D");
+    Entity entity = CreateEntity(name);
     entity.AddComponent<PositionComponent>(glm::vec3(0.0f, 0.0f, 0.0f));
 
     PRIMITIVES::Rectangle2D rect = PRIMITIVES::Rectangle2D();
     //rect.SetEntityHandle(entity);
 
     entity.AddComponent<MeshComponent>(rect);
+
+    return entity;
+}
+
+Entity Scene::AddTerrain(const TerrainSettings& settings)
+{
+    Entity entity = CreateEntity("Terrain");
+    //entity.AddComponent<PositionComponent>(glm::vec3(0.0f, 0.0f, 0.0f));
+
+    std::shared_ptr<Terrain> terrain = std::make_shared<Terrain>(0, 0, settings.texture.c_str(), settings.heightMap.c_str());
+    entity.AddComponent<TerrainComponent>(terrain);
 
     return entity;
 }

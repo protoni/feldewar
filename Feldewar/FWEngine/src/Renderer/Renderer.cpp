@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include "Primitives.h"
+#include "Terrain.h"
 
 #include <iostream>
 #include <filesystem>
@@ -87,10 +88,31 @@ void Renderer::activateShader(std::shared_ptr<Shader>& shader)
 void Renderer::applyTranslations(
     std::shared_ptr<Shader>& shader,
     const glm::mat4& transform,
+    const glm::vec3& position,
+    const glm::vec3& scale
+)
+{
+    glm::mat4 model = transform;
+    model = glm::translate(model, position);
+    model = glm::scale(model, scale);
+    shader->setMat4("model", model);
+}
+
+void Renderer::applyTranslations(
+    std::shared_ptr<Shader>& shader,
+    const glm::mat4& transform,
     const glm::vec3& position
 )
 {
     shader->setMat4("model", glm::translate(transform, position));
+}
+
+void Renderer::applyTranslations(
+    std::shared_ptr<Shader>& shader,
+    const glm::mat4& transform
+)
+{
+    shader->setMat4("model", transform);
 }
 
 void Renderer::DrawRect(const glm::mat4& transform,
@@ -113,6 +135,24 @@ void Renderer::DrawRect(const glm::mat4& transform,
     }
 }
 
+void Renderer::DrawTerrain(const glm::mat4& transform, const Terrain& terrain)
+{
+    switch (m_rendererType)
+    {
+    case RenderAPI::OpenGL:
+        terrain.UseTexture();
+        activateShader(m_lightMeshShader);
+        applyTranslations(m_lightMeshShader, glm::mat4(1.0f), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.5, 0.5, 0.5));
+        m_rendererOpenGL->DrawTerrain(terrain.GetBuffer());
+        break;
+
+    case RenderAPI::Unknown:
+    default:
+        std::cout << "Can't ClearScreen! Unknown renderer API given!" << std::endl;
+        break;
+    }
+}
+
 const bool Renderer::LoadData(
     const std::vector<float>& vertices,
     const std::vector<unsigned int>& indices,
@@ -125,6 +165,32 @@ const bool Renderer::LoadData(
     {
     case RenderAPI::OpenGL:
         RendererOpenGL::LoadData(vertices, indices, buf);
+        ret = true;
+        break;
+
+    case RenderAPI::Unknown:
+    default:
+        std::cout << "Can't ClearScreen! Unknown renderer API given!" << std::endl;
+        break;
+    }
+
+    return ret;
+}
+
+const bool Renderer::LoadData(
+    const std::vector<float>& vertices,
+    const std::vector<float>& textureCoords,
+    const std::vector<float>& normals,
+    const std::vector<unsigned int>& indices,
+    BufferObjectSeparated& buf
+)
+{
+    bool ret = false;
+
+    switch (s_rendererType)
+    {
+    case RenderAPI::OpenGL:
+        RendererOpenGL::LoadData(vertices, textureCoords, normals, indices, buf);
         ret = true;
         break;
 
