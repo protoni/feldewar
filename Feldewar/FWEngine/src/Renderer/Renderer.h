@@ -34,8 +34,8 @@ public:
     // Clear screen
     void ClearScreen(glm::vec4 color, int settings) const;
 
-    // Draw rectangle
-    void DrawRect(
+    // Draw mesh object
+    void DrawMesh(
         const glm::mat4& transform,
         const glm::vec3& position,
         const Mesh& mesh

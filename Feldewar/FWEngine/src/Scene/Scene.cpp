@@ -79,7 +79,7 @@ const bool Scene::Update() const
             std::cout << "Tag:       " << tag.Tag << std::endl;
             std::cout << "----------------------------------------------\n" << std::endl;
 
-            m_renderer->DrawRect(
+            m_renderer->DrawMesh(
                 transformation.Transform,
                 position.Position,
                 meshData.mesh
@@ -95,6 +95,19 @@ Entity Scene::AddRectangle2D(const std::string& name)
     entity.AddComponent<PositionComponent>(glm::vec3(0.0f, 0.0f, 0.0f));
 
     PRIMITIVES::Rectangle2D rect = PRIMITIVES::Rectangle2D();
+    //rect.SetEntityHandle(entity);
+
+    entity.AddComponent<MeshComponent>(rect);
+
+    return entity;
+}
+
+Entity Scene::AddCube3D(const std::string& name)
+{
+    Entity entity = CreateEntity(name);
+    entity.AddComponent<PositionComponent>(glm::vec3(0.0f, 0.0f, 0.0f));
+
+    PRIMITIVES::Cube3D rect = PRIMITIVES::Cube3D();
     //rect.SetEntityHandle(entity);
 
     entity.AddComponent<MeshComponent>(rect);

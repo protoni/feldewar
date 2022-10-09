@@ -115,7 +115,7 @@ void Renderer::applyTranslations(
     shader->setMat4("model", transform);
 }
 
-void Renderer::DrawRect(const glm::mat4& transform,
+void Renderer::DrawMesh(const glm::mat4& transform,
     const glm::vec3& position,
     const Mesh& mesh
 )
@@ -125,7 +125,7 @@ void Renderer::DrawRect(const glm::mat4& transform,
     case RenderAPI::OpenGL:
         activateShader(m_lightMeshShader);
         applyTranslations(m_lightMeshShader, transform, position);
-        m_rendererOpenGL->DrawSquare(mesh.GetBuffer());
+        m_rendererOpenGL->DrawMesh(mesh.GetBuffer());
         break;
 
     case RenderAPI::Unknown:

@@ -36,7 +36,7 @@ namespace ENGINE
         //UnBindBuffer();
     }
 
-    void RendererOpenGL::DrawSquare(const BufferObject& buf) const
+    void RendererOpenGL::DrawMesh(const BufferObject& buf) const
     {
         BindVertexArray(buf.VAO);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buf.EBO);
@@ -47,10 +47,6 @@ namespace ENGINE
     {
         glClearColor(color.x, color.y, color.z, color.w);
         glClear(settings);
-    }
-
-    void RendererOpenGL::DrawRect(const glm::mat4& transform, const glm::vec3& position)
-    {
     }
 
     void RendererOpenGL::DrawTerrain(const BufferObjectSeparated& buf) const

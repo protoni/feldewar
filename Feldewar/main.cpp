@@ -51,8 +51,8 @@ int main(int argc, char** argv)
     }
 
     // Load models and textures, build shaders
-    settings.data.modelPath = "./Models";
-    settings.data.texturePath = "./Textures";
+    settings.data.modelPath = "Feldewar/Models";
+    settings.data.texturePath = "Feldewar/Textures";
     if (!Application::LoadData(settings.data, err)) {
         err.Print();
     }
@@ -63,6 +63,9 @@ int main(int argc, char** argv)
     // Create test rect
     Entity rect = scene.AddRectangle2D("Rect2d");
     
+    // Create test cube
+    Entity cube = scene.AddCube3D("Cube3d");
+
     // Load terrain
     settings.terrain.heightMap = "heightmap.png";
     settings.terrain.texture = "grass.png";
@@ -70,7 +73,7 @@ int main(int argc, char** argv)
     Entity terrain = scene.AddTerrain(settings.terrain);
 
     // Load playable main player entity ( default cube )
-    ///FW::Player player = app.LoadPlayer(err);
+    ///FW::Player player = app.LoadPlayer(cube, err);
     ///if (err.IsErr()) {
     ///    err.Print();
     ///}
@@ -83,19 +86,20 @@ int main(int argc, char** argv)
 
         if (movePtr <= 2.0f) {
             rect.MoveLeft(moveAmount);
-            terrain.MoveLeft(moveAmount);
+            //terrain.MoveLeft(moveAmount);
+            //cube.MoveLeft(moveAmount*0.1);
         }
         else if (movePtr > 2.0f && movePtr <= 4.0f) {
             rect.MoveUp(moveAmount);
-            terrain.MoveUp(moveAmount);
+            //terrain.MoveUp(moveAmount);
         }
         else if (movePtr > 4.0f && movePtr <= 6.0f) {
             rect.MoveRight(moveAmount);
-            terrain.MoveRight(moveAmount);
+            //terrain.MoveRight(moveAmount);
         }
         else if (movePtr > 6.0f && movePtr <= 8.0f) {
             rect.MoveDown(moveAmount);
-            terrain.MoveDown(moveAmount);
+            //terrain.MoveDown(moveAmount);
         }
         else
             movePtr = 0.0f;

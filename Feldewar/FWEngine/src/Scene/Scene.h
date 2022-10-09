@@ -26,7 +26,11 @@ public:
 
     const bool Update() const;
 
+    // Add 2D rectangle primitive
     Entity AddRectangle2D(const std::string& name = std::string());
+
+    // Add 3D cube primitive
+    Entity AddCube3D(const std::string& name = std::string());
 
     // Load terrain related data
     Entity AddTerrain(const TerrainSettings& settings);

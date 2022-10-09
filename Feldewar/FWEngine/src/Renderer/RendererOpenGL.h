@@ -95,17 +95,14 @@ public:
     // Unbind vertex and element array buffers
     static void UnBindBuffer();
 
-    // Draw primitive square
-    void DrawSquare(const BufferObject& buf) const;
+    // Draw mesh object
+    void DrawMesh(const BufferObject& buf) const;
 
     // Draw terrain
     void DrawTerrain(const BufferObjectSeparated& buf) const;
 
     // Clear screen
     void ClearScreen(glm::vec4 color, int settings) const;
-
-    // Draw rectangle
-    void DrawRect(const glm::mat4& transform, const glm::vec3& position);
 
     // Load vertex data to the GPU
     static void LoadData(
