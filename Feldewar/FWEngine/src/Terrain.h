@@ -1,7 +1,7 @@
 #ifndef TERRAIN_H
 #define TERRAIN_H
 
-#include "Texture.h"
+#include "DataObjects/Texture.h"
 #include "Renderer/Renderer.h"
 
 #include <vector>
@@ -23,7 +23,8 @@ public:
     float MAX_PIXEL_COLOR = 256 * 256 * 256;
     int VERTEX_COUNT = 128;
 
-    Terrain(const int gridX, const int gridZ, const char* texture, const char* heightmap);
+    //Terrain(const int gridX, const int gridZ, const char* texture, const char* heightmap);
+    Terrain(const int gridX, const int gridZ, const Texture& texture, const Texture& heightmap);
     ~Terrain();
 
     // Get coordinates
@@ -42,6 +43,9 @@ public:
     // Use current texture
     void UseTexture() const;
 
+    const unsigned int GetVertexCount() const { return m_vertices.size(); }
+    const unsigned int GetIndexCount() const { return m_indices.size(); }
+
 private:
 
     // Generate terrain data
@@ -56,10 +60,6 @@ private:
     std::vector<float> m_texCoords;
     std::vector<unsigned int> m_indices;
 
-    // Textures
-    Texture* m_terrainTexture   = nullptr;
-    Texture* m_terrainHeightMap = nullptr;
-
     // Buffer objects
     std::vector<unsigned int> m_VBOs;
     unsigned int m_VAO;
@@ -69,6 +69,9 @@ private:
 
     // Buffer data
     BufferObjectSeparated m_buf;
+
+    Texture m_terrainTexture;
+    Texture m_terrainHeightMap;
 };
 
 } // namespace ENGINE

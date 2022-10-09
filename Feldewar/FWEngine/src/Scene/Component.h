@@ -57,11 +57,11 @@ struct MeshComponent
 
 struct TerrainComponent
 {
-    std::shared_ptr<Terrain> terrain;
+    Terrain terrain;
 
     TerrainComponent() = default;
     TerrainComponent(const TerrainComponent&) = default;
-    TerrainComponent(const std::shared_ptr<Terrain>& terrainData)
+    TerrainComponent(const Terrain& terrainData)
         : terrain(terrainData) {}
 };
 

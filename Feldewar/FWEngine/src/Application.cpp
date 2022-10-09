@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "DebugMacros.h"
+#include "DataObjects/DataLoader.h"
 
 #include <chrono>
 #include <thread>
@@ -48,6 +49,31 @@ const bool Application::Init(WindowSettings& settings, Error& error)
     }
 
     m_initialized = true;
+    return true;
+}
+
+const bool Application::LoadData(DataSettings& settings, Error& error)
+{
+    bool ret = true;
+    // Load textures
+    if (!DataLoader::LoadTexture("Feldewar/Textures/heightmap.png")) {
+        std::cout << "Failed to load texture: Feldewar/Textures/heightmap.png" << std::endl;
+        ret = false;
+    }
+    if (!DataLoader::LoadTexture("Feldewar/Textures/grass.png")) {
+        std::cout << "Failed to load texture: Feldewar/Textures/grass.png" << std::endl;
+        ret = false;
+    }
+
+    // Load shaders
+    if (!DataLoader::LoadShader(
+        "Feldewar/Shaders/lightMeshShader.vs",
+        "Feldewar/Shaders/lightMeshShader.fs"
+    )) {
+        std::cout << "Failed to load shader: Feldewar/Shaders/lightMeshShader.vs" << std::endl;
+        ret = false;
+    }
+
     return true;
 }
 
@@ -111,6 +137,7 @@ bool Application::Run()
 void Application::Cleanup()
 {
     m_window->Cleanup();
+    DataLoader::Cleanup();
 }
 
 } // namespace ENGINE

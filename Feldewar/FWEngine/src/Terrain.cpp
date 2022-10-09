@@ -1,19 +1,15 @@
 #include "Terrain.h"
 
+
 #include <iostream>
 
 namespace ENGINE
 {
 
-Terrain::Terrain(const int gridX, const int gridZ, const char* texture, const char* heightmap)
-    : m_x(gridX* SIZE), m_z(gridZ* SIZE)
+Terrain::Terrain(const int gridX, const int gridZ, const Texture& texture, const Texture& heightmap)
+    : m_x(gridX* SIZE), m_z(gridZ* SIZE), m_terrainTexture(texture), m_terrainHeightMap(heightmap)
 {
-    // Load terrain texture
-    m_terrainTexture = new Texture(texture, true);
-
-    // Load terrain height map
-    m_terrainHeightMap = new Texture(heightmap, true);
-
+    
     // Generate terrain
     if (!generateTerrain()) {
         std::cout << "Failed to generate terrain!" << std::endl;
@@ -32,20 +28,20 @@ Terrain::~Terrain()
     //    glDeleteBuffers(1, &m_VBOs.at(i));
     //}
 
-    if (m_terrainTexture) {
-        delete m_terrainTexture;
-        m_terrainTexture = NULL;
-    }
-
-    if (m_terrainHeightMap) {
-        delete m_terrainHeightMap;
-        m_terrainHeightMap = NULL;
-    }
+    //if (m_terrainTexture) {
+    //    delete m_terrainTexture;
+    //    m_terrainTexture = NULL;
+    //}
+    //
+    //if (m_terrainHeightMap) {
+    //    delete m_terrainHeightMap;
+    //    m_terrainHeightMap = NULL;
+    //}
 }
 
 void Terrain::UseTexture() const
 {
-    m_terrainTexture->use(0);
+    m_terrainTexture.Use(0);
 }
 
 bool Terrain::generateTerrain()
@@ -105,10 +101,11 @@ bool Terrain::generateTerrain()
 
 float Terrain::getVertexYpos(int x, int z)
 {
-    if (x < 0 || x >= m_terrainHeightMap->getWidth() || z < 0 || z >= m_terrainHeightMap->getHeight())
+    if (x < 0 || x >= m_terrainHeightMap.GetWidth() || z < 0 || z >= m_terrainHeightMap.GetHeight())
         return 0.0f;
 
-    float height = m_terrainHeightMap->getRGB(x, z);
+    float height = m_terrainHeightMap.GetRGB(x, z);
+    //std::cout << "height: " << height << std::endl;
 
     height += MAX_PIXEL_COLOR / 2.0f;
     height /= MAX_PIXEL_COLOR / 2.0f;

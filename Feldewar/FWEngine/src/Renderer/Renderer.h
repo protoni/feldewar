@@ -3,7 +3,7 @@
 
 #include "DebugMacros.h"
 #include "RendererOpenGL.h"
-#include "Shader.h"
+#include "DataObjects/Shader.h"
 #include "Settings.h"
 #include "Camera.h"
 
@@ -42,7 +42,7 @@ public:
     );
 
     // Render terrain
-    void DrawTerrain(const glm::mat4& transform, const Terrain& terrain);
+    void DrawTerrain(const glm::mat4& transform, const glm::vec3& position, const Terrain& terrain);
 
     // Load vertex data to the GPU
     static const bool LoadData(

@@ -53,9 +53,9 @@ int main(int argc, char** argv)
     // Load models and textures, build shaders
     settings.data.modelPath = "./Models";
     settings.data.texturePath = "./Textures";
-    ///if (!app.LoadData(settings.data, err)) {
-    ///    err.Print();
-    ///}
+    if (!Application::LoadData(settings.data, err)) {
+        err.Print();
+    }
 
     // Create a scene
     Scene& scene = app.CreateScene(err);
@@ -64,8 +64,8 @@ int main(int argc, char** argv)
     Entity rect = scene.AddRectangle2D("Rect2d");
     
     // Load terrain
-    settings.terrain.heightMap = "Feldewar/Textures/heightmap.png";
-    settings.terrain.texture = "Feldewar/Textures/grass.png";
+    settings.terrain.heightMap = "heightmap.png";
+    settings.terrain.texture = "grass.png";
     settings.terrain.size = 800.0f;
     Entity terrain = scene.AddTerrain(settings.terrain);
 
@@ -81,14 +81,22 @@ int main(int argc, char** argv)
         app.ProcessInput();
 
 
-        if (movePtr <= 2.0f)
+        if (movePtr <= 2.0f) {
             rect.MoveLeft(moveAmount);
-        else if (movePtr > 2.0f && movePtr <= 4.0f)
+            terrain.MoveLeft(moveAmount);
+        }
+        else if (movePtr > 2.0f && movePtr <= 4.0f) {
             rect.MoveUp(moveAmount);
-        else if (movePtr > 4.0f && movePtr <= 6.0f)
+            terrain.MoveUp(moveAmount);
+        }
+        else if (movePtr > 4.0f && movePtr <= 6.0f) {
             rect.MoveRight(moveAmount);
-        else if (movePtr > 6.0f && movePtr <= 8.0f)
+            terrain.MoveRight(moveAmount);
+        }
+        else if (movePtr > 6.0f && movePtr <= 8.0f) {
             rect.MoveDown(moveAmount);
+            terrain.MoveDown(moveAmount);
+        }
         else
             movePtr = 0.0f;
 

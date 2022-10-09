@@ -3,15 +3,24 @@
 
 #include "stb_image.h"
 
+namespace ENGINE
+{
+
 class Texture
 {
 
 public:
+    // If initialization is successful, set to true
+    bool Loaded = false;
+
+    Texture() = default;
     Texture(const char* path, bool useRGBA = false);
     ~Texture();
 
     bool load();
-    void use(int offset);
+
+    virtual void Use(int offset) const;
+
     unsigned int getTexture();
 
     /* Deactivate texture */
@@ -21,12 +30,16 @@ public:
     unsigned char* getData() { return m_data; }
 
     // Get image properties
-    int getWidth() { return m_width; }
-    int getHeight() { return m_height; }
+    const int GetWidth() const { return m_width; }
+    const int GetHeight() const { return m_height; }
     int getNrChannels() { return m_nrChannels; }
 
     // Get image's RGB value
-    float getRGB(int x, int y);
+    //float getRGB(int x, int y);
+    const float GetRGB(const unsigned int x, const unsigned int y) const;
+
+    // Clear image data
+    void Clear() const;
 
 private:
     /* Path of the texture file */
@@ -45,5 +58,7 @@ private:
     int m_height = 0;
     int m_nrChannels = 0;
 };
+
+} // namespace ENGINE
 
 #endif // TEXTURE_H

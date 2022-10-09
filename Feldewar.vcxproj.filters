@@ -23,11 +23,11 @@
     <Filter Include="Source Files\dependencies\entt">
       <UniqueIdentifier>{097669fe-15ed-4788-8bec-2df7cf999fbe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\FWEngine\Renderer\Shaders">
-      <UniqueIdentifier>{7b039f95-0910-45eb-b834-1f3f6f6070be}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\dependencies\stb_image">
       <UniqueIdentifier>{83e314ab-33cf-43d0-9ce8-dbf815385286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FWEngine\DataObjects">
+      <UniqueIdentifier>{b8f0cadb-64c0-4c15-810c-22ea23aa2cf5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -64,11 +64,14 @@
     <ClCompile Include="Feldewar\FWEngine\src\Terrain.cpp">
       <Filter>Source Files\FWEngine</Filter>
     </ClCompile>
-    <ClCompile Include="Feldewar\FWEngine\src\Renderer\Texture.cpp">
-      <Filter>Source Files\FWEngine\Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="Feldewar\FWEngine\dependencies\stb_image\stb_image.cpp">
       <Filter>Source Files\dependencies\stb_image</Filter>
+    </ClCompile>
+    <ClCompile Include="Feldewar\FWEngine\src\DataObjects\DataLoader.cpp">
+      <Filter>Source Files\FWEngine\DataObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Feldewar\FWEngine\src\DataObjects\Texture.cpp">
+      <Filter>Source Files\FWEngine\DataObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -117,9 +120,6 @@
     <ClInclude Include="Feldewar\FWEngine\dependencies\glad\glad.h">
       <Filter>Source Files\dependencies\glad</Filter>
     </ClInclude>
-    <ClInclude Include="Feldewar\FWEngine\src\Renderer\Shader.h">
-      <Filter>Source Files\FWEngine\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="Feldewar\FWEngine\dependencies\entt\entt.hpp">
       <Filter>Source Files\dependencies\entt</Filter>
     </ClInclude>
@@ -132,25 +132,17 @@
     <ClInclude Include="Feldewar\FWEngine\src\Terrain.h">
       <Filter>Source Files\FWEngine</Filter>
     </ClInclude>
-    <ClInclude Include="Feldewar\FWEngine\src\Renderer\Texture.h">
-      <Filter>Source Files\FWEngine\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="Feldewar\FWEngine\dependencies\stb_image\stb_image.h">
       <Filter>Source Files\dependencies\stb_image</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Feldewar\FWEngine\src\Renderer\Shaders\shader.vs">
-      <Filter>Source Files\FWEngine\Renderer\Shaders</Filter>
-    </None>
-    <None Include="Feldewar\FWEngine\src\Renderer\Shaders\lightMeshShader.fs">
-      <Filter>Source Files\FWEngine\Renderer\Shaders</Filter>
-    </None>
-    <None Include="Feldewar\FWEngine\src\Renderer\Shaders\lightMeshShader.vs">
-      <Filter>Source Files\FWEngine\Renderer\Shaders</Filter>
-    </None>
-    <None Include="Feldewar\FWEngine\src\Renderer\Shaders\lightShader.fs">
-      <Filter>Source Files\FWEngine\Renderer\Shaders</Filter>
-    </None>
+    <ClInclude Include="Feldewar\FWEngine\src\DataObjects\DataLoader.h">
+      <Filter>Source Files\FWEngine\DataObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\DataObjects\Shader.h">
+      <Filter>Source Files\FWEngine\DataObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\DataObjects\Texture.h">
+      <Filter>Source Files\FWEngine\DataObjects</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

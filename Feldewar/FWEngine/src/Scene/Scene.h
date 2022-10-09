@@ -3,7 +3,8 @@
 
 #include "Settings.h"
 #include "Error.h"
-
+#include "DataObjects/Texture.h"
+#include "DataObjects/DataLoader.h"
 
 #include <string>
 
@@ -35,6 +36,10 @@ private:
 
     friend class Entity;
     entt::registry m_registry;
+
+    // Textures
+    Texture m_terrainTexture;
+    Texture m_terrainHeightMap;
     
 
 };

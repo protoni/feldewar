@@ -17,13 +17,13 @@ Renderer::Renderer(std::shared_ptr<Camera>& camera) : m_camera(camera)
 
     // Build shaders
     m_lightShader = std::make_shared<Shader>(
-        "Feldewar/FWEngine/src/Renderer/Shaders/shader.vs", 
-        "Feldewar/FWEngine/src/Renderer/Shaders/lightShader.fs"
+        "Feldewar/Shaders/shader.vs", 
+        "Feldewar/Shaders/lightShader.fs"
     );
 
     m_lightMeshShader = std::make_shared<Shader>(
-        "Feldewar/FWEngine/src/Renderer/Shaders/lightMeshShader.vs",
-        "Feldewar/FWEngine/src/Renderer/Shaders/lightMeshShader.fs"
+        "Feldewar/Shaders/lightMeshShader.vs",
+        "Feldewar/Shaders/lightMeshShader.fs"
     );
 }
 
@@ -135,14 +135,14 @@ void Renderer::DrawRect(const glm::mat4& transform,
     }
 }
 
-void Renderer::DrawTerrain(const glm::mat4& transform, const Terrain& terrain)
+void Renderer::DrawTerrain(const glm::mat4& transform, const glm::vec3& position, const Terrain& terrain)
 {
     switch (m_rendererType)
     {
     case RenderAPI::OpenGL:
         terrain.UseTexture();
         activateShader(m_lightMeshShader);
-        applyTranslations(m_lightMeshShader, glm::mat4(1.0f), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.5, 0.5, 0.5));
+        applyTranslations(m_lightMeshShader, glm::mat4(1.0f), position, glm::vec3(0.5, 0.5, 0.5));
         m_rendererOpenGL->DrawTerrain(terrain.GetBuffer());
         break;
 

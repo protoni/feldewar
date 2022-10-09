@@ -24,6 +24,9 @@ public:
     // Init window, camera and input stuff
     const bool Init(WindowSettings& settings, Error& error);
 
+    // Load textures, models and shaders
+    static const bool LoadData(DataSettings& settings, Error& error);
+
     // Handle input
     void ProcessInput();
 

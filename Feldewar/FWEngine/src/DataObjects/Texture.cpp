@@ -6,12 +6,21 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-Texture::Texture(const char* path, bool useRGBA) : m_path(path), m_texture(0), m_useRGBA(useRGBA)
+namespace ENGINE
+{
+
+Texture::Texture(const char* path, bool useRGBA)
+    : m_path(path), m_texture(0), m_useRGBA(useRGBA)
 {
     load();
 }
 
 Texture::~Texture()
+{
+    //stbi_image_free(m_data);
+}
+
+void Texture::Clear() const
 {
     stbi_image_free(m_data);
 }
@@ -42,7 +51,7 @@ bool Texture::load()
     m_data = stbi_load(m_path, &m_width, &m_height, &m_nrChannels, desiredChannels);
 
     if (m_data) {
-        if(m_useRGBA)
+        if (m_useRGBA)
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_width, m_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_data);
         else
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_width, m_height, 0, GL_RGB, GL_UNSIGNED_BYTE, m_data);
@@ -57,21 +66,32 @@ bool Texture::load()
 
     glBindTexture(GL_TEXTURE_2D, 0);
 
+    Loaded = ret;
     return ret;
 }
 
-void Texture::use(int offset)
+void Texture::Use(int offset) const
 {
     glActiveTexture(GL_TEXTURE0 + offset);
     glBindTexture(GL_TEXTURE_2D, m_texture);
 }
+
+//void Texture::Use(int offset)
+//{
+//}
+//
+//void Texture::use(int offset)
+//{
+//    glActiveTexture(GL_TEXTURE0 + offset);
+//    glBindTexture(GL_TEXTURE_2D, m_texture);
+//}
 
 void Texture::deactivate()
 {
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-float Texture::getRGB(int x, int y)
+const float Texture::GetRGB(const unsigned int x, const unsigned int y) const
 {
     const stbi_uc* p = m_data + (4 * (y + m_width * x));
 
@@ -85,4 +105,4 @@ unsigned int Texture::getTexture()
     return m_texture;
 }
 
-
+} // namespace ENGINE

@@ -9,13 +9,22 @@
 #include <glad/glad.h> // include glad to get all the required OpenGL headers
 #include <glm/glm.hpp>
 
+namespace ENGINE
+{
+
 class Shader
 {
 public:
     unsigned int ID;
 
+    // If initialization is successful, set to true
+    bool Loaded = false;
+
+    Shader() = default;
     Shader(const char* vertexPath, const char* fragmentPath)
     {
+        bool ok = true;
+
         // 1. Retrieve the shaders source code from filePath
         std::string vertexCode;
         std::string fragmentCode;
@@ -23,8 +32,8 @@ public:
         std::ifstream fShaderFile;
 
         // Ensure ifstream objects can throw exceptions:
-        vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit );
-        fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit );
+        vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+        fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
         try {
             // Open files
@@ -49,6 +58,7 @@ public:
             std::cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ" << std::endl;
             std::cout << "vertexPath: " << vertexPath << std::endl;
             std::cout << "fragmentPath: " << fragmentPath << std::endl;
+            ok = false;
         }
 
         const char* vShaderCode = vertexCode.c_str();
@@ -61,7 +71,7 @@ public:
 
         // Vertex Shader
         vertex = glCreateShader(GL_VERTEX_SHADER);
-        glShaderSource(vertex, 1, &vShaderCode, NULL); 
+        glShaderSource(vertex, 1, &vShaderCode, NULL);
         glCompileShader(vertex);
 
         glGetShaderiv(vertex, GL_COMPILE_STATUS, &success); // Check for build errors
@@ -69,6 +79,7 @@ public:
         {
             glGetShaderInfoLog(vertex, 512, NULL, infoLog);
             std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+            ok = false;
         }
 
         // Fragment Shader
@@ -81,6 +92,7 @@ public:
         {
             glGetShaderInfoLog(fragment, 512, NULL, infoLog);
             std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
+            ok = false;
         }
 
         // Link vertex and fragment shaders into a shader program
@@ -95,10 +107,13 @@ public:
         {
             glGetProgramInfoLog(ID, 512, NULL, infoLog);
             std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
+            ok = false;
         }
 
         glDeleteShader(vertex);
         glDeleteShader(fragment);
+
+        Loaded = ok;
     }
 
     void use()
@@ -120,7 +135,7 @@ public:
         glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
     }
 
-    void setMat4(const std::string& name, const glm::mat4 &mat) const
+    void setMat4(const std::string& name, const glm::mat4& mat) const
     {
         GLuint loc = glGetUniformLocation(ID, name.c_str());
         glUniformMatrix4fv(loc, 1, GL_FALSE, &mat[0][0]);
@@ -144,4 +159,5 @@ public:
     }
 };
 
-#endif
+} // namespac ENGINE
+#endif // SHADER_H

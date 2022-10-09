@@ -4,6 +4,7 @@
 #include "Renderer/Renderer.h"
 #include "Primitives.h"
 
+
 #include <iostream>
 #include <memory>
 
@@ -24,6 +25,12 @@ Scene::Scene(std::shared_ptr<Renderer>& renderer) : m_renderer(renderer)
 {
     std::cout << "Scene constructed!" << std::endl;
     
+    // Load terrain texture
+    m_terrainTexture = DataLoader::GetTexture("grass.png");//new Texture(texture, true);
+
+    // Load terrain height map
+    m_terrainHeightMap = DataLoader::GetTexture("heightmap.png");//new Texture(heightmap, true);
+
 }
 
 Scene::~Scene()
@@ -51,6 +58,18 @@ const bool Scene::Update() const
     //    TransformComponent& item = view.get<TransformComponent>(entity);
     //}
 
+    // Draw terrain first
+    for (auto [entity, transformation, position, terrainData] :
+        m_registry.view<TransformComponent, PositionComponent, TerrainComponent>().each()) {
+
+        std::cout << "\n------------------TERRAIN --------------------" << std::endl;
+        std::cout << "Entity ID: " << static_cast<int>(entity) << std::endl;
+        std::cout << "----------------------------------------------\n" << std::endl;
+
+        std::cout << " Terrain vertex count: " << terrainData.terrain.GetVertexCount() << std::endl;
+        m_renderer->DrawTerrain(transformation.Transform, position.Position, terrainData.terrain);
+    }
+
     for (auto [entity, position, transformation, tag, meshData] :
         m_registry.view<PositionComponent, TransformComponent, TagComponent, MeshComponent>().each()) {
 
@@ -65,16 +84,6 @@ const bool Scene::Update() const
                 position.Position,
                 meshData.mesh
             );
-    }
-
-    for (auto [entity, transformation, terrainData] :
-        m_registry.view<TransformComponent, TerrainComponent>().each()) {
-            
-            std::cout << "\n------------------TERRAIN --------------------" << std::endl;
-            std::cout << "Entity ID: " << static_cast<int>(entity) << std::endl;
-            std::cout << "----------------------------------------------\n" << std::endl;
-
-            m_renderer->DrawTerrain(transformation.Transform, *terrainData.terrain);
     }
 
     return false;
@@ -96,9 +105,18 @@ Entity Scene::AddRectangle2D(const std::string& name)
 Entity Scene::AddTerrain(const TerrainSettings& settings)
 {
     Entity entity = CreateEntity("Terrain");
-    //entity.AddComponent<PositionComponent>(glm::vec3(0.0f, 0.0f, 0.0f));
+    entity.AddComponent<PositionComponent>(glm::vec3(0.0f, 0.0f, 0.0f));
 
-    std::shared_ptr<Terrain> terrain = std::make_shared<Terrain>(0, 0, settings.texture.c_str(), settings.heightMap.c_str());
+    //std::shared_ptr<Terrain> terrain = std::make_shared<Terrain>(0, 0, settings.texture.c_str(), settings.heightMap.c_str());
+    
+    //Terrain terrain = Terrain(0, 0, settings.texture.c_str(), settings.heightMap.c_str());
+    Terrain terrain = Terrain(
+        0,
+        0,
+        DataLoader::GetTexture(settings.texture.c_str()),
+        DataLoader::GetTexture(settings.heightMap.c_str())
+    );
+
     entity.AddComponent<TerrainComponent>(terrain);
 
     return entity;
