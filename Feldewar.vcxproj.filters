@@ -5,18 +5,144 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="Source Files\FWEngine">
+      <UniqueIdentifier>{edb15a8f-57a7-4296-9273-869a373fc03d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Source Files\FWEngine\Renderer">
+      <UniqueIdentifier>{8ee1bf08-1b61-4134-b97d-0a2ab598333a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FWEngine\Scene">
+      <UniqueIdentifier>{8048683c-0c16-4542-a76e-0bd40808b6fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\dependencies">
+      <UniqueIdentifier>{b6128f03-4188-45ee-8ea1-4c479220652d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\dependencies\glad">
+      <UniqueIdentifier>{5e473083-f1f3-4afe-b915-c6b1c4ec73a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\dependencies\entt">
+      <UniqueIdentifier>{097669fe-15ed-4788-8bec-2df7cf999fbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\dependencies\stb_image">
+      <UniqueIdentifier>{83e314ab-33cf-43d0-9ce8-dbf815385286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FWEngine\DataObjects">
+      <UniqueIdentifier>{b8f0cadb-64c0-4c15-810c-22ea23aa2cf5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Feldewar\src\main.cpp">
+    <ClCompile Include="Feldewar\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Feldewar\FWEngine\src\Application.cpp">
+      <Filter>Source Files\FWEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Feldewar\FWEngine\src\Input.cpp">
+      <Filter>Source Files\FWEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Feldewar\FWEngine\src\Window.cpp">
+      <Filter>Source Files\FWEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Feldewar\FWEngine\src\Scene\Entity.cpp">
+      <Filter>Source Files\FWEngine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Feldewar\FWEngine\src\Scene\Scene.cpp">
+      <Filter>Source Files\FWEngine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Feldewar\FWEngine\src\Renderer\Renderer.cpp">
+      <Filter>Source Files\FWEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Feldewar\FWEngine\src\Renderer\RendererOpenGL.cpp">
+      <Filter>Source Files\FWEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Feldewar\FWEngine\dependencies\glad\glad.c">
+      <Filter>Source Files\dependencies\glad</Filter>
+    </ClCompile>
+    <ClCompile Include="Feldewar\FWEngine\src\Renderer\Mesh.cpp">
+      <Filter>Source Files\FWEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Feldewar\FWEngine\src\Terrain.cpp">
+      <Filter>Source Files\FWEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Feldewar\FWEngine\dependencies\stb_image\stb_image.cpp">
+      <Filter>Source Files\dependencies\stb_image</Filter>
+    </ClCompile>
+    <ClCompile Include="Feldewar\FWEngine\src\DataObjects\DataLoader.cpp">
+      <Filter>Source Files\FWEngine\DataObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Feldewar\FWEngine\src\DataObjects\Texture.cpp">
+      <Filter>Source Files\FWEngine\DataObjects</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Feldewar\FWEngine\src\Window.h">
+      <Filter>Source Files\FWEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\Application.h">
+      <Filter>Source Files\FWEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\Camera.h">
+      <Filter>Source Files\FWEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\DebugMacros.h">
+      <Filter>Source Files\FWEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\Error.h">
+      <Filter>Source Files\FWEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\FWEngine.h">
+      <Filter>Source Files\FWEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\Input.h">
+      <Filter>Source Files\FWEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\Settings.h">
+      <Filter>Source Files\FWEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\Scene\Scene.h">
+      <Filter>Source Files\FWEngine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\Scene\Component.h">
+      <Filter>Source Files\FWEngine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\Scene\Entity.h">
+      <Filter>Source Files\FWEngine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\Renderer\Renderer.h">
+      <Filter>Source Files\FWEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\Renderer\Shapes.h">
+      <Filter>Source Files\FWEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\Renderer\RendererOpenGL.h">
+      <Filter>Source Files\FWEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\dependencies\glad\glad.h">
+      <Filter>Source Files\dependencies\glad</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\dependencies\entt\entt.hpp">
+      <Filter>Source Files\dependencies\entt</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\Renderer\Mesh.h">
+      <Filter>Source Files\FWEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\Renderer\Primitives.h">
+      <Filter>Source Files\FWEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\Terrain.h">
+      <Filter>Source Files\FWEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\dependencies\stb_image\stb_image.h">
+      <Filter>Source Files\dependencies\stb_image</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\DataObjects\DataLoader.h">
+      <Filter>Source Files\FWEngine\DataObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\DataObjects\Shader.h">
+      <Filter>Source Files\FWEngine\DataObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\DataObjects\Texture.h">
+      <Filter>Source Files\FWEngine\DataObjects</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
