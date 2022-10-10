@@ -79,7 +79,7 @@ int main(int argc, char** argv)
     // Setup player movement keys
     //app.SetupPlayer(player);
 
-    player.RotateTo(glm::vec3(90.0f, 90.0f, 90.0f));
+    player.RotateTo(45.0f, 0.0f, 0.0f);
 
     float movePtr = 0.0f;
     float moveAmount = 0.01f;

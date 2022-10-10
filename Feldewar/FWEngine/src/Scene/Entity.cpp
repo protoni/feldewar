@@ -59,9 +59,10 @@ const bool Entity::MoveBackward(const float amount) {
     return(Move(glm::vec3(0.0f, 0.0f, amount)));
 }
 
-const bool Entity::Rotate(const glm::vec3& rotation)
+const bool Entity::Rotate(const float x, const float y, const float z)
 {
     if (HasComponent<PositionComponent>()) {
+        const glm::vec3& rotation = glm::vec3(x, y, z);
         auto& position = GetComponent<PositionComponent>();
 
         (position.Rotation.x + rotation.x) > 360.0f ? position.Rotation.x -= 360.0f : 0;
@@ -80,9 +81,10 @@ const bool Entity::Rotate(const glm::vec3& rotation)
     return false;
 }
 
-const bool Entity::RotateTo(const glm::vec3& rotation)
+const bool Entity::RotateTo(const float x, const float y, const float z)
 {
     if (HasComponent<PositionComponent>()) {
+        const glm::vec3& rotation = glm::vec3(x, y, z);
         auto& position = GetComponent<PositionComponent>();
         glm::vec3 newRotation = glm::vec3();
 
@@ -95,22 +97,22 @@ const bool Entity::RotateTo(const glm::vec3& rotation)
 
 const bool Entity::RotateHorizontal(const float amount)
 {
-    return(Rotate(glm::vec3(0.0f, amount, 0.0f)));
+    return(Rotate(0.0f, amount, 0.0f));
 }
 
 const bool Entity::RotateVertical(const float amount)
 {
-    return(Rotate(glm::vec3(amount, 0.0f, 0.0f)));
+    return(Rotate(amount, 0.0f, 0.0f));
 }
 
 const bool Entity::RotateLeft(const float amount)
 {
-    return(Rotate(glm::vec3(0.0f, amount, 0.0f)));
+    return(Rotate(0.0f, amount, 0.0f));
 }
 
 const bool Entity::RotateRight(const float amount)
 {
-    return(Rotate(glm::vec3(0.0f, -amount, 0.0f)));
+    return(Rotate(0.0f, -amount, 0.0f));
 }
 
 const glm::vec3& Entity::GetPosition()

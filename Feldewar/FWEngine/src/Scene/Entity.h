@@ -55,8 +55,8 @@ public:
     const bool MoveBackward(const float amount);
 
     // Rotation
-    const bool Rotate(const glm::vec3& rotation);    // Add to current rotation of all axis' a specific amount
-    const bool RotateTo(const glm::vec3& rotation);  // Rotate all axis to a specific value
+    const bool Rotate(const float x, const float y, const float z);    // Add to current rotation of all axis' a specific amount
+    const bool RotateTo(const float x, const float y, const float z);  // Rotate all axis to a specific value
     const bool RotateHorizontal(const float amount); // Rotate around Y-axis
     const bool RotateVertical(const float amount);   // Rotate around X-axis
     const bool RotateLeft(const float amount);       // Rotate around Y-axis to left
