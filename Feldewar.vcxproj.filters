@@ -29,6 +29,9 @@
     <Filter Include="Source Files\FWEngine\DataObjects">
       <UniqueIdentifier>{b8f0cadb-64c0-4c15-810c-22ea23aa2cf5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\FWEngine\Scene\Components">
+      <UniqueIdentifier>{60b02967-8ce4-4fd5-bc0b-b31ca9bef63d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Feldewar\main.cpp">
@@ -61,9 +64,6 @@
     <ClCompile Include="Feldewar\FWEngine\src\Renderer\Mesh.cpp">
       <Filter>Source Files\FWEngine\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="Feldewar\FWEngine\src\Terrain.cpp">
-      <Filter>Source Files\FWEngine</Filter>
-    </ClCompile>
     <ClCompile Include="Feldewar\FWEngine\dependencies\stb_image\stb_image.cpp">
       <Filter>Source Files\dependencies\stb_image</Filter>
     </ClCompile>
@@ -72,6 +72,12 @@
     </ClCompile>
     <ClCompile Include="Feldewar\FWEngine\src\DataObjects\Texture.cpp">
       <Filter>Source Files\FWEngine\DataObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Feldewar\FWEngine\src\Scene\Components\Terrain.cpp">
+      <Filter>Source Files\FWEngine\Scene\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Feldewar\FWEngine\src\Scene\Components\Player.cpp">
+      <Filter>Source Files\FWEngine\Scene\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -129,9 +135,6 @@
     <ClInclude Include="Feldewar\FWEngine\src\Renderer\Primitives.h">
       <Filter>Source Files\FWEngine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="Feldewar\FWEngine\src\Terrain.h">
-      <Filter>Source Files\FWEngine</Filter>
-    </ClInclude>
     <ClInclude Include="Feldewar\FWEngine\dependencies\stb_image\stb_image.h">
       <Filter>Source Files\dependencies\stb_image</Filter>
     </ClInclude>
@@ -143,6 +146,15 @@
     </ClInclude>
     <ClInclude Include="Feldewar\FWEngine\src\DataObjects\Texture.h">
       <Filter>Source Files\FWEngine\DataObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\Scene\Components\Terrain.h">
+      <Filter>Source Files\FWEngine\Scene\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\Scene\Components\Player.h">
+      <Filter>Source Files\FWEngine\Scene\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\FWEngine\src\EngineUtils.h">
+      <Filter>Source Files\FWEngine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,8 +1,9 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
-#include "Mesh.h"
-#include "Terrain.h"
+#include "Renderer/Mesh.h"
+#include "Scene/Components/Terrain.h"
+#include "Scene/Components/Player.h"
 
 #include <string>
 
@@ -38,11 +39,30 @@ struct TransformComponent
 struct PositionComponent
 {
     glm::vec3 Position;
+    glm::vec4 Rotation = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
+    // glm::vec4 Rotation = glm::vec4(0.0001f, 0.0001f, 0.0001f, 0.0f);
 
     PositionComponent() = default;
     PositionComponent(const PositionComponent&) = default;
     PositionComponent(const glm::vec3& position)
-        : Position(position) {}
+        : Position(position)
+    {}
+    PositionComponent(
+        const glm::vec3& position,
+        const glm::vec4& rotation)
+        : Position(position)
+        , Rotation(rotation)
+    {}
+};
+
+struct SpeedComponent
+{
+    float Speed = 2.5f;
+
+    SpeedComponent() = default;
+    SpeedComponent(const SpeedComponent&) = default;
+    SpeedComponent(const float speed)
+        : Speed(speed) {}
 };
 
 struct MeshComponent
@@ -63,6 +83,16 @@ struct TerrainComponent
     TerrainComponent(const TerrainComponent&) = default;
     TerrainComponent(const Terrain& terrainData)
         : terrain(terrainData) {}
+};
+
+struct PlayerComponent
+{
+    Player player;
+
+    PlayerComponent() = default;
+    PlayerComponent(const PlayerComponent&) = default;
+    PlayerComponent(const Player& playerData)
+        : player(playerData) {}
 };
 
 }

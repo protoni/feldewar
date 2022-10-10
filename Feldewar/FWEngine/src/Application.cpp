@@ -86,8 +86,10 @@ Scene& Application::CreateScene(Error& error)
 {
     if (!m_initialized)
         error.Set(ErrorMessage::SceneCreationError);
-    else
-        m_scene = std::make_shared<Scene>(m_renderer);
+    else {
+        m_scene = std::make_shared<Scene>(m_renderer, this);
+        m_input->SetScene(m_scene);
+    }
 
     return *m_scene;
 }
@@ -95,6 +97,12 @@ Scene& Application::CreateScene(Error& error)
 Renderer& Application::GetRenderer()
 {
     return *m_renderer;
+}
+
+void Application::SetPlayer(Entity* player)// std::shared_ptr<Entity>& player)
+{
+    m_player = player;
+    m_input->SetPlayer(player);
 }
 
 bool Application::Run()

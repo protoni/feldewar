@@ -119,6 +119,11 @@ public:
         //Position.y = 0.0f;
     }
 
+    void Follow(glm::vec3 position)
+    {
+        Position = position - 3.0f;
+    }
+
     // processes input received from a mouse input system. Expects the offset value in both the x and y direction.
     void ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true)
     {

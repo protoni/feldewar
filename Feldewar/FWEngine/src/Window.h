@@ -40,6 +40,9 @@ public:
         return size;
     }
 
+    // Is the debug mode enabled ( Debug UI visible )
+    const bool GetDebugMode() const { return m_debugModeOn; }
+
     // Shutdown GLFW
     void Cleanup() { glfwTerminate(); }
 

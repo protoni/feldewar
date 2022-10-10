@@ -1,9 +1,10 @@
 #include "Scene.h"
-#include "Component.h"
-#include "Entity.h"
-#include "Renderer/Renderer.h"
+#include "Scene/Entity.h"
+#include "Scene/Component.h"
+#include "Application.h"
+#include "Renderer.h"
 #include "Primitives.h"
-
+#include "Components/Player.h"
 
 #include <iostream>
 #include <memory>
@@ -21,7 +22,8 @@ static void onTransfromConstruct(entt::registry& registry, entt::entity entity)
     //}
 }
 
-Scene::Scene(std::shared_ptr<Renderer>& renderer) : m_renderer(renderer)
+Scene::Scene(std::shared_ptr<Renderer>& renderer, Application* app)
+    : m_renderer(renderer), m_app(app)
 {
     std::cout << "Scene constructed!" << std::endl;
     
@@ -61,11 +63,11 @@ const bool Scene::Update() const
     // Draw terrain first
     for (auto [entity, transformation, position, terrainData] :
         m_registry.view<TransformComponent, PositionComponent, TerrainComponent>().each()) {
-
+    
         std::cout << "\n------------------TERRAIN --------------------" << std::endl;
         std::cout << "Entity ID: " << static_cast<int>(entity) << std::endl;
         std::cout << "----------------------------------------------\n" << std::endl;
-
+    
         std::cout << " Terrain vertex count: " << terrainData.terrain.GetVertexCount() << std::endl;
         m_renderer->DrawTerrain(transformation.Transform, position.Position, terrainData.terrain);
     }
@@ -82,6 +84,7 @@ const bool Scene::Update() const
             m_renderer->DrawMesh(
                 transformation.Transform,
                 position.Position,
+                position.Rotation,
                 meshData.mesh
             );
     }
@@ -133,6 +136,34 @@ Entity Scene::AddTerrain(const TerrainSettings& settings)
     entity.AddComponent<TerrainComponent>(terrain);
 
     return entity;
+}
+
+Entity Scene::AddPlayer(Entity& playerMesh, const std::string& name)
+{
+    //Entity entity = CreateEntity(name);
+    //entity.AddComponent<PositionComponent>(glm::vec3(0.0f, 0.0f, 0.0f));
+    //
+    Mesh mesh;
+    if (!playerMesh.GetMesh(mesh)) {
+        // Add default cube
+        mesh = PRIMITIVES::Cube3D();
+        std::cout << "Can't use player mesh!" << std::endl;
+    }
+    else {
+        std::cout << "Using player mesh!" << std::endl;
+    }
+
+    playerMesh.AddComponent<PlayerComponent>(Player(mesh));
+    playerMesh.AddComponent<SpeedComponent>();
+    
+    std::shared_ptr<Entity> entityPtr = std::make_shared<Entity>(playerMesh);
+    //*entityPtr = playerMesh;
+
+    m_app->SetPlayer(&playerMesh);
+
+    //m_player = entity;
+
+    return playerMesh;
 }
 
 }

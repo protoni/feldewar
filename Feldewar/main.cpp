@@ -1,6 +1,7 @@
 
 #include "FWEngine.h"
 #include "DebugMacros.h"
+#include "EngineUtils.h"
 
 #include "windows.h"
 #include <crtdbg.h>
@@ -73,20 +74,24 @@ int main(int argc, char** argv)
     Entity terrain = scene.AddTerrain(settings.terrain);
 
     // Load playable main player entity ( default cube )
-    ///FW::Player player = app.LoadPlayer(cube, err);
-    ///if (err.IsErr()) {
-    ///    err.Print();
-    ///}
+    Entity player = scene.AddPlayer(cube, "Player1");
+
+    // Setup player movement keys
+    //app.SetupPlayer(player);
+
+    player.RotateTo(glm::vec3(90.0f, 90.0f, 90.0f));
 
     float movePtr = 0.0f;
     float moveAmount = 0.01f;
+    float rotateAmount = 1.0f;
     while (app.Run()) {
         app.ProcessInput();
 
 
         if (movePtr <= 2.0f) {
             rect.MoveLeft(moveAmount);
-            //terrain.MoveLeft(moveAmount);
+            //player.RotateLeft(rotateAmount);
+            //player.MoveLeft(moveAmount);
             //cube.MoveLeft(moveAmount*0.1);
         }
         else if (movePtr > 2.0f && movePtr <= 4.0f) {

@@ -12,6 +12,7 @@ class Mesh
 {
 
 public:
+    Mesh() = default;
     Mesh(
         const std::vector<float>& vertices,
         const std::vector<unsigned int>& indices

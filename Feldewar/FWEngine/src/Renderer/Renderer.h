@@ -38,6 +38,7 @@ public:
     void DrawMesh(
         const glm::mat4& transform,
         const glm::vec3& position,
+        const glm::vec4& rotation,
         const Mesh& mesh
     );
 
@@ -67,7 +68,15 @@ private:
     // Activate shader and set projection matrix
     void activateShader(std::shared_ptr<Shader>& shader);
 
-    // Translate ans scale a matrix
+    // Translate, rotate and scale a matrix
+    void applyTranslations(
+        std::shared_ptr<Shader>& shader,
+        const glm::mat4& transform,
+        const glm::vec3& position,
+        const glm::vec4& rotation
+    );
+
+    // Translate and scale a matrix
     void applyTranslations(
         std::shared_ptr<Shader>& shader,
         const glm::mat4& transform,

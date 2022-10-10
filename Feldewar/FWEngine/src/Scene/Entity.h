@@ -2,6 +2,7 @@
 #define ENTITY_H
 //#include "../FWEngine.h"
 #include "Scene.h"
+#include "Renderer/Mesh.h"
 #include "Component.h"
 
 #include <entt/entt.hpp>
@@ -45,10 +46,30 @@ public:
 
     // Moving
     const bool Move(const glm::vec3& pos);
+    const bool MoveTo(const glm::vec3& pos);
     const bool MoveLeft(const float amount);
     const bool MoveRight(const float amount);
     const bool MoveUp(const float amount);
     const bool MoveDown(const float amount);
+    const bool MoveForward(const float amount);
+    const bool MoveBackward(const float amount);
+
+    // Rotation
+    const bool Rotate(const glm::vec3& rotation);    // Add to current rotation of all axis' a specific amount
+    const bool RotateTo(const glm::vec3& rotation);  // Rotate all axis to a specific value
+    const bool RotateHorizontal(const float amount); // Rotate around Y-axis
+    const bool RotateVertical(const float amount);   // Rotate around X-axis
+    const bool RotateLeft(const float amount);       // Rotate around Y-axis to left
+    const bool RotateRight(const float amount);      // Rotate around Y-axis to right
+
+    // Get entity position
+    const glm::vec3& GetPosition();
+
+    // Get entity mesh if it exists
+    const bool GetMesh(Mesh& mesh);
+
+    // Get speed of a entity if speed component exists
+    const float GetSpeed();
 
     //const entt::entity GetHandle() const { return m_entityHandle; }
 

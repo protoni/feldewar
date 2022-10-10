@@ -1,6 +1,7 @@
 #include "Renderer.h"
 #include "Primitives.h"
-#include "Terrain.h"
+#include "Scene/Components/Terrain.h"
+#include "EngineUtils.h"
 
 #include <iostream>
 #include <filesystem>
@@ -87,6 +88,23 @@ void Renderer::activateShader(std::shared_ptr<Shader>& shader)
 
 void Renderer::applyTranslations(
     std::shared_ptr<Shader>& shader,
+    const glm::mat4& transform
+)
+{
+    shader->setMat4("model", transform);
+}
+
+void Renderer::applyTranslations(
+    std::shared_ptr<Shader>& shader,
+    const glm::mat4& transform,
+    const glm::vec3& position
+)
+{
+    shader->setMat4("model", glm::translate(transform, position));
+}
+
+void Renderer::applyTranslations(
+    std::shared_ptr<Shader>& shader,
     const glm::mat4& transform,
     const glm::vec3& position,
     const glm::vec3& scale
@@ -101,22 +119,27 @@ void Renderer::applyTranslations(
 void Renderer::applyTranslations(
     std::shared_ptr<Shader>& shader,
     const glm::mat4& transform,
-    const glm::vec3& position
-)
-{
-    shader->setMat4("model", glm::translate(transform, position));
-}
-
-void Renderer::applyTranslations(
-    std::shared_ptr<Shader>& shader,
-    const glm::mat4& transform
-)
-{
-    shader->setMat4("model", transform);
-}
-
-void Renderer::DrawMesh(const glm::mat4& transform,
     const glm::vec3& position,
+    const glm::vec4& rotation
+)
+{
+    glm::mat4 model = transform;
+    model = glm::translate(model, position);
+    model *= glm::toMat4(
+        glm::quat(glm::vec3(
+            glm::radians(rotation.x),
+            glm::radians(rotation.y),
+            glm::radians(rotation.z)
+        ))
+    );
+    
+    shader->setMat4("model", model);
+}
+
+void Renderer::DrawMesh(
+    const glm::mat4& transform,
+    const glm::vec3& position,
+    const glm::vec4& rotation,
     const Mesh& mesh
 )
 {
@@ -124,13 +147,13 @@ void Renderer::DrawMesh(const glm::mat4& transform,
     {
     case RenderAPI::OpenGL:
         activateShader(m_lightMeshShader);
-        applyTranslations(m_lightMeshShader, transform, position);
+        applyTranslations(m_lightMeshShader, transform, position, rotation);
         m_rendererOpenGL->DrawMesh(mesh.GetBuffer());
         break;
 
     case RenderAPI::Unknown:
     default:
-        std::cout << "Can't ClearScreen! Unknown renderer API given!" << std::endl;
+        std::cout << "Can't DrawMesh! Unknown renderer API given!" << std::endl;
         break;
     }
 }
@@ -148,7 +171,7 @@ void Renderer::DrawTerrain(const glm::mat4& transform, const glm::vec3& position
 
     case RenderAPI::Unknown:
     default:
-        std::cout << "Can't ClearScreen! Unknown renderer API given!" << std::endl;
+        std::cout << "Can't DrawTerrain! Unknown renderer API given!" << std::endl;
         break;
     }
 }
@@ -170,7 +193,7 @@ const bool Renderer::LoadData(
 
     case RenderAPI::Unknown:
     default:
-        std::cout << "Can't ClearScreen! Unknown renderer API given!" << std::endl;
+        std::cout << "Can't LoadData! Unknown renderer API given!" << std::endl;
         break;
     }
 
@@ -196,7 +219,7 @@ const bool Renderer::LoadData(
 
     case RenderAPI::Unknown:
     default:
-        std::cout << "Can't ClearScreen! Unknown renderer API given!" << std::endl;
+        std::cout << "Can't LoadData! Unknown renderer API given!" << std::endl;
         break;
     }
 

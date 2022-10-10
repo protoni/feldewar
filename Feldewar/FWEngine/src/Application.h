@@ -7,6 +7,7 @@
 #include "Camera.h"
 #include "Input.h"
 #include "Scene/Scene.h"
+#include "Scene/Components/Player.h"
 #include "Renderer/Renderer.h"
 
 #include <memory>
@@ -36,6 +37,10 @@ public:
     // Get renderer object
     Renderer& GetRenderer();
 
+    // Set main player when created
+    //void SetPlayer(std::shared_ptr<Entity>& player);
+    void SetPlayer(Entity* player);
+
     // Run main appilcation loop
     bool Run();
 
@@ -48,6 +53,8 @@ private:
     std::shared_ptr<Camera>    m_camera   = nullptr;
     std::shared_ptr<Scene>     m_scene    = nullptr;
     std::shared_ptr<Renderer>  m_renderer = nullptr;
+
+    Entity* m_player = nullptr;
 
     // Time
     double m_deltaTime = 0.0f;   // Time between current frame and last frame
