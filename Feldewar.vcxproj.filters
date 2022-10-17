@@ -32,6 +32,9 @@
     <Filter Include="Source Files\FWEngine\Scene\Components">
       <UniqueIdentifier>{60b02967-8ce4-4fd5-bc0b-b31ca9bef63d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{7c49d7ad-0c43-47c9-93a6-28add53e1de5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Feldewar\main.cpp">
@@ -76,8 +79,8 @@
     <ClCompile Include="Feldewar\FWEngine\src\Scene\Components\Terrain.cpp">
       <Filter>Source Files\FWEngine\Scene\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Feldewar\FWEngine\src\Scene\Components\Player.cpp">
-      <Filter>Source Files\FWEngine\Scene\Components</Filter>
+    <ClCompile Include="Feldewar\Game\Player.cpp">
+      <Filter>Source Files\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -150,11 +153,11 @@
     <ClInclude Include="Feldewar\FWEngine\src\Scene\Components\Terrain.h">
       <Filter>Source Files\FWEngine\Scene\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Feldewar\FWEngine\src\Scene\Components\Player.h">
-      <Filter>Source Files\FWEngine\Scene\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Feldewar\FWEngine\src\EngineUtils.h">
       <Filter>Source Files\FWEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Feldewar\Game\Player.h">
+      <Filter>Source Files\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

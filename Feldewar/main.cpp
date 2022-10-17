@@ -1,4 +1,6 @@
 
+#include "Game/Player.h"
+
 #include "FWEngine.h"
 #include "DebugMacros.h"
 #include "EngineUtils.h"
@@ -74,12 +76,14 @@ int main(int argc, char** argv)
     Entity terrain = scene.AddTerrain(settings.terrain);
 
     // Load playable main player entity ( default cube )
-    Entity player = scene.AddPlayer(cube, "Player1");
+    //Entity player = scene.AddPlayer(cube, "Player1");
+
+    Player player(scene.AddPlayer(cube, "Player1"));
 
     // Setup player movement keys
     //app.SetupPlayer(player);
 
-    player.RotateTo(45.0f, 0.0f, 0.0f);
+    //player.RotateTo(45.0f, 0.0f, 0.0f);
 
     float movePtr = 0.0f;
     float moveAmount = 0.01f;
@@ -89,7 +93,9 @@ int main(int argc, char** argv)
 
 
         if (movePtr <= 2.0f) {
-            rect.MoveLeft(moveAmount);
+            player.Rotate(rotateAmount);
+            player.MoveForward(moveAmount);
+            //rect.MoveLeft(moveAmount);
             //player.RotateLeft(rotateAmount);
             //player.MoveLeft(moveAmount);
             //cube.MoveLeft(moveAmount*0.1);
@@ -97,19 +103,28 @@ int main(int argc, char** argv)
         else if (movePtr > 2.0f && movePtr <= 4.0f) {
             rect.MoveUp(moveAmount);
             //terrain.MoveUp(moveAmount);
+            player.Rotate(rotateAmount);
+            player.MoveForward(moveAmount);
         }
         else if (movePtr > 4.0f && movePtr <= 6.0f) {
             rect.MoveRight(moveAmount);
             //terrain.MoveRight(moveAmount);
+            player.Rotate(rotateAmount);
+            player.MoveForward(moveAmount);
         }
         else if (movePtr > 6.0f && movePtr <= 8.0f) {
             rect.MoveDown(moveAmount);
             //terrain.MoveDown(moveAmount);
+            player.Rotate(rotateAmount);
+            player.MoveForward(moveAmount);
         }
         else
             movePtr = 0.0f;
 
        movePtr += moveAmount;
+
+       player.Update();
+
     }
 
     app.Cleanup();

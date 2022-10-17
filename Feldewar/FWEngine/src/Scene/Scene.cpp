@@ -4,7 +4,6 @@
 #include "Application.h"
 #include "Renderer.h"
 #include "Primitives.h"
-#include "Components/Player.h"
 
 #include <iostream>
 #include <memory>
@@ -153,7 +152,6 @@ Entity Scene::AddPlayer(Entity& playerMesh, const std::string& name)
         std::cout << "Using player mesh!" << std::endl;
     }
 
-    playerMesh.AddComponent<PlayerComponent>(Player(mesh));
     playerMesh.AddComponent<SpeedComponent>();
     
     std::shared_ptr<Entity> entityPtr = std::make_shared<Entity>(playerMesh);

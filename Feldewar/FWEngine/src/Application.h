@@ -7,7 +7,6 @@
 #include "Camera.h"
 #include "Input.h"
 #include "Scene/Scene.h"
-#include "Scene/Components/Player.h"
 #include "Renderer/Renderer.h"
 
 #include <memory>

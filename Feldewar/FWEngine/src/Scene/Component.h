@@ -3,7 +3,7 @@
 
 #include "Renderer/Mesh.h"
 #include "Scene/Components/Terrain.h"
-#include "Scene/Components/Player.h"
+
 
 #include <string>
 
@@ -85,15 +85,6 @@ struct TerrainComponent
         : terrain(terrainData) {}
 };
 
-struct PlayerComponent
-{
-    Player player;
-
-    PlayerComponent() = default;
-    PlayerComponent(const PlayerComponent&) = default;
-    PlayerComponent(const Player& playerData)
-        : player(playerData) {}
-};
 
 }
 
