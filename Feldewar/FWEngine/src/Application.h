@@ -40,6 +40,15 @@ public:
     //void SetPlayer(std::shared_ptr<Entity>& player);
     void SetPlayer(Entity* player);
 
+    // Check keyboard event
+    const bool KeyPressed(const INPUT_EVENTS& key) const;
+
+    // Get delta time
+    const double GetDeltaTime() const;
+
+    // Is free-look mode enabled currently
+    const bool GetFreeLookOn() const { return m_window->GetDebugMode(); }
+
     // Run main appilcation loop
     bool Run();
 

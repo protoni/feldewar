@@ -105,8 +105,21 @@ void Application::SetPlayer(Entity* player)// std::shared_ptr<Entity>& player)
     m_input->SetPlayer(player);
 }
 
+const bool Application::KeyPressed(const INPUT_EVENTS& key) const
+{
+    return m_input->KeyPressed(key);
+}
+
+const double Application::GetDeltaTime() const
+{
+    return m_deltaTime;
+}
+
 bool Application::Run()
 {
+    // Handle input events
+    ProcessInput();
+    
     // Calculate delta time
     double currentFrame = glfwGetTime();
     m_deltaTime = currentFrame - m_lastFrame;

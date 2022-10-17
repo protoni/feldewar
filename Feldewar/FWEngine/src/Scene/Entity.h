@@ -46,6 +46,7 @@ public:
 
     // Moving
     const bool Move(const glm::vec3& pos);
+    const bool Move(const float x, const float y, const float z);
     const bool MoveTo(const glm::vec3& pos);
     const bool MoveLeft(const float amount);
     const bool MoveRight(const float amount);
@@ -61,6 +62,10 @@ public:
     const bool RotateVertical(const float amount);   // Rotate around X-axis
     const bool RotateLeft(const float amount);       // Rotate around Y-axis to left
     const bool RotateRight(const float amount);      // Rotate around Y-axis to right
+    const bool GetRotation(float& x, float& y, float& z);
+    const float GetRotationX();
+    const float GetRotationY();
+    const float GetRotationZ();
 
     // Get entity position
     const glm::vec3& GetPosition();

@@ -24,6 +24,11 @@ const bool Entity::Move(const glm::vec3& pos)
     return false;
 }
 
+const bool Entity::Move(const float x, const float y, const float z)
+{
+    return Move(glm::vec3(x, y, z));
+}
+
 const bool Entity::MoveTo(const glm::vec3& pos)
 {
     if (HasComponent<PositionComponent>()) {
@@ -113,6 +118,48 @@ const bool Entity::RotateLeft(const float amount)
 const bool Entity::RotateRight(const float amount)
 {
     return(Rotate(0.0f, -amount, 0.0f));
+}
+
+const bool Entity::GetRotation(float& x, float& y, float& z)
+{
+    if (HasComponent<PositionComponent>()) {
+        auto& position = GetComponent<PositionComponent>();
+
+        x = position.Rotation.x;
+        y = position.Rotation.y;
+        z = position.Rotation.z;
+        //position.Rotation = glm::vec4(rotation, 0.0f);
+        return true;
+    }
+
+    return false;
+}
+
+const float Entity::GetRotationX()
+{
+    float y, x, z = 0.0f;
+
+    GetRotation(x, y, z);
+
+    return x;
+}
+
+const float Entity::GetRotationY()
+{
+    float y, x, z = 0.0f;
+
+    GetRotation(x, y, z);
+
+    return y;
+}
+
+const float Entity::GetRotationZ()
+{
+    float y, x, z = 0.0f;
+
+    GetRotation(x, y, z);
+
+    return z;
 }
 
 const glm::vec3& Entity::GetPosition()
